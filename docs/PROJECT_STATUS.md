@@ -21,7 +21,7 @@ The repository exists and the discovery documentation set is in place. Requireme
 - [x] Testing structure and CI pipeline proposed for the QA Lead to own — [TESTING_STRATEGY.md](TESTING_STRATEGY.md), [CI_PIPELINE_PROPOSAL.md](CI_PIPELINE_PROPOSAL.md) (D-018, Proposed)
 - [x] Technology evaluation with verified latest-stable versions and two compared stacks — [TECHNOLOGY_EVALUATION.md](TECHNOLOGY_EVALUATION.md) (D-023…D-030, Proposed)
 - [x] Performance acceptance criteria — [PERFORMANCE_ACCEPTANCE_CRITERIA.md](PERFORMANCE_ACCEPTANCE_CRITERIA.md) (D-022)
-- [x] Live staging environment requirement recorded (D-031) with Laravel Cloud vs Railway hosting evaluation and cost estimates; Railway Singapore proposed (D-032) — [STAGING_ENVIRONMENT.md](STAGING_ENVIRONMENT.md). Nothing provisioned.
+- [x] Live staging environment requirement recorded (D-031) with Laravel Cloud vs Railway hosting evaluation and cost estimates; **Railway Singapore accepted (D-032, 2026-11-07)** with an execution blueprint — [STAGING_ENVIRONMENT.md](STAGING_ENVIRONMENT.md) §6a. Nothing provisioned; account and payment are the owner's step at gate G-STAGE.
 - [x] Verified competitor benchmark of Throf, Farmbrite, UNIFORM Goat (site blocked — unverified), PeakHerds, UBIQ vs. all KK Farm requirements, with the ten gaps none address — [research/COMPETITOR_BENCHMARK.md](research/COMPETITOR_BENCHMARK.md)
 - [x] On-Site Discovery Pack for the farm visit — [farm-visit/](farm-visit/) (field guide, blank templates, RFID inspection checklist, role interviews, prioritised questions)
 - [x] Real-time, media/photos and shared-VM designs — [REALTIME_ARCHITECTURE.md](REALTIME_ARCHITECTURE.md), [MEDIA_AND_PHOTOS.md](MEDIA_AND_PHOTOS.md), [SHARED_VM_ARCHITECTURE.md](SHARED_VM_ARCHITECTURE.md)
@@ -33,7 +33,7 @@ The repository exists and the discovery documentation set is in place. Requireme
 | Excel workbook analysis | **Blocked** | `KK_Farms_360_Goat_Management_System.xlsx` has not been supplied to the engineering side. Placeholder at [research/EXCEL_WORKBOOK_ANALYSIS.md](research/EXCEL_WORKBOOK_ANALYSIS.md). | CEO / project owner to share the file |
 | Competitor review (goatmart.pk) | **Partially blocked** | Site returned "deployment paused" on 2026-11-07 and has no web archive. | Re-check later; or CEO to share screenshots / app name |
 | RFID hardware capability | **Blocked** | Reader make/model and SDK unknown until inspected. | Farm visit |
-| Technology stack decision | **Decided** — Option A accepted 2026-11-07 (D-023; see [TECHNOLOGY_EVALUATION.md](TECHNOLOGY_EVALUATION.md)) | Owner to confirm on GitHub (PR #18 / issue #3). Mobile delivery (D-028) and staging host (D-032) still open. Development still gated on G0. | Ammar (GitHub confirmation) |
+| Technology stack decision | **Decided** — Option A accepted 2026-11-07 (D-023; see [TECHNOLOGY_EVALUATION.md](TECHNOLOGY_EVALUATION.md)) | Owner to confirm on GitHub (PR #18 / issue #3). Staging host also decided (D-032 Railway, PR #19). Mobile delivery (D-028) still open. Development still gated on G0. | Ammar (GitHub confirmation) |
 | Premium / real-time / performance / photo requirements | **Documented, awaiting review** | Folded into REQUIREMENTS §11 and the new design docs; decisions D-019…D-030 (D-019/020/021 accepted as owner direction, the rest *Proposed*). | Ammar to review |
 
 ## Not started (by design)

@@ -1,6 +1,6 @@
 # Live Staging Environment — Owner Testing Milestone
 
-**Status:** Requirement accepted (D-031, owner instruction 2026-11-07); hosting choice **Proposed** (D-032). **Nothing is provisioned, no account created, no payment details entered** — per the owner's rule, paid resources, domains and payment methods require Ammar's explicit approval first.
+**Status:** Requirement accepted (D-031, owner instruction 2026-11-07); hosting choice **Accepted — Railway, Singapore (D-032, 2026-11-07)**. **Nothing is provisioned yet, no account created, no payment details entered**: provisioning happens only when the MVP approaches gate G-STAGE, and the account, plan and payment method are set up by Ammar himself (see §6a).
 
 ## 1. Required outcome
 
@@ -79,7 +79,23 @@ Evaluated for the approved-pending architecture (Laravel 13 + PostgreSQL 18 + Va
 | 2 | **Laravel Cloud Starter, Singapore** | Best Laravel ergonomics (managed Reverb, Horizon, scheduler, R2 storage as toggles) and PR previews; 2–3× the cost; Postgres 17 (18 unconfirmed) breaks version parity; rollback not documented. Choose if the spike shows Reverb-on-Railway is troublesome and the owner accepts PG 17 on staging. |
 | 3 | **Hetzner VPS + production Compose stack** | Required anyway as a **pre-production rehearsal** (restore + portability drill, SHARED_VM_ARCHITECTURE §4) before the farm VM; could double as staging if the team prefers full parity over managed convenience. |
 
-Either way: **no resource is created until Ammar approves the provider, plan, region and monthly budget in GitHub.**
+**Decision taken (2026-11-07):** Option 1 — Railway, Singapore, Hobby plan, budget ≈ $18–25/month (D-032 Accepted).
+
+## 6a. Approved staging blueprint on Railway (to be executed only at gate G-STAGE)
+
+| Item | Plan |
+|------|------|
+| Account & billing | Created by **Ammar** (owner account, payment method, spending limit set to the approved budget). Engineering never holds payment details. |
+| Project / environments | One Railway project `kk-farm`; environments `staging` (shared) and PR environments (auto-created from GitHub, auto-deleted on merge/close). No `production` environment here — production is the farm VM. |
+| Services (mirrors the shared-VM Compose design) | `web` (Laravel + Octane behind Railway's proxy) · `worker` (Horizon) · `scheduler` (looping `schedule:run`) · `realtime` (Laravel Reverb) · `imgproxy` · `postgres` (official template, PG 18, volume) · `valkey` (Redis-protocol template, volume) · Storage Bucket (S3-compatible, private, signed URLs) |
+| Region | Singapore for all services and the bucket |
+| Secrets | Railway environment variables for app secrets; GitHub Environment `staging` holds only the Railway project token and the demo-account seed passwords (masked); nothing in Git |
+| Deploy flow | `deploy-staging.yml` → waits for Ammar's approval → deploys the chosen SHA → migrations → `seed:demo` → smoke test → SHA + URL in the job summary |
+| Domain | Provider default `*.up.railway.app` until Q-STG-3 is decided; custom domain added later with automatic TLS |
+| Backups | Daily volume snapshots + Postgres PITR to the bucket; restore drill before the acceptance package |
+| Access | `noindex`; rate limiting; optional basic-auth gate (Q-STG-5) |
+| Cost control | Hobby plan; spending limit; monthly invoice reported in the acceptance package; upgrade to Pro only with approval |
+| Exit criteria for the choice | If the Phase 1 spike shows Reverb or the scheduler pattern unworkable on Railway, fall back to Laravel Cloud (Option 2) via a new decision row |
 
 ## 7. Acceptance package (delivered before declaring staging ready)
 
