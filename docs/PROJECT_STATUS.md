@@ -16,6 +16,7 @@ The repository exists and the discovery documentation set is in place. Requireme
 - [x] Open questions catalogued in [OPEN_QUESTIONS.md](OPEN_QUESTIONS.md)
 - [x] Domain model, architecture proposal, database draft, security/RBAC, RFID research, AI design, roadmap, decisions log drafted
 - [x] Issue and PR templates added
+- [x] Platform & repository comparison with licensing and reuse feasibility — [research/PLATFORM_COMPARISON.md](research/PLATFORM_COMPARISON.md) (proposes D-016: custom build, reuse open standards, no GPL fork)
 
 ## In progress / blocked
 

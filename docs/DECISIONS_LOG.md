@@ -19,6 +19,7 @@ Architecture Decision Record (ADR) style. One row per decision; longer rationale
 | D-013 | 2026-11-07 | Phase ordering: Identity/RFID → Vet & weight → Breeding → Feeding/ops → Finance → Intelligence. | **Proposed** | Identity underpins everything; vets create the data AI needs; finance is CEO-only initially. | See IMPLEMENTATION_ROADMAP.md. |
 | D-014 | 2026-11-07 | Intelligence layer starts as deterministic, vet-tunable rules; ML/LLM only later on validated data. | **Proposed** (`[ASSUMED]` Q-AI-1) | Transparency; data quality. | Rule engine in Phase 2. |
 | D-015 | 2026-11-07 | The `.gitignore` excludes spreadsheets, CSV, databases and `.env` files so real farm data cannot be committed accidentally. | Accepted | Brief §8 "no real data". | The Excel workbook is analysed locally; only the *analysis* is committed, never the file. |
+| D-016 | 2026-11-07 | Build KK Farm as a custom application; reuse open standards (ICAR ADE, ISO 11784/11785) and permissive libraries; borrow data-model ideas from farmOS; do not fork a GPL platform or adopt a SaaS product. | **Proposed** | No maintained open-source project covers goat breeding + vet accountability + feeding approval + finance; see [research/PLATFORM_COMPARISON.md](research/PLATFORM_COMPARISON.md). | Licence check on every dependency; ADE-aligned naming; commercial products used only as feature benchmarks. |
 
 ## How to add a decision
 

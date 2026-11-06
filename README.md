@@ -34,7 +34,7 @@ Read in this order if you are new:
 9. [AI_INTELLIGENCE_DESIGN.md](docs/AI_INTELLIGENCE_DESIGN.md) — advisory intelligence layer, guard-rails
 10. [IMPLEMENTATION_ROADMAP.md](docs/IMPLEMENTATION_ROADMAP.md) — recommended phases
 11. [DECISIONS_LOG.md](docs/DECISIONS_LOG.md) — decisions taken, with reasons
-12. [docs/research/](docs/research/) — competitor and workbook analysis
+12. [docs/research/](docs/research/) — competitor and workbook analysis, and the [platform & repository comparison](docs/research/PLATFORM_COMPARISON.md) (licensing and reuse feasibility)
 
 ## Ground rules for this phase
 
