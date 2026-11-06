@@ -2,6 +2,14 @@
 
 **Status:** Requirement accepted (D-031, owner instruction 2026-11-07). **Hosting budget: $0 (D-033).** The Railway paid-plan approval (D-032) was **withdrawn by the owner on 2026-11-07** — no paid subscriptions, no credit card or payment method, no paid trials, no account creation or provisioning that could generate charges, no domain purchases. §5–6a below are retained as a **reference evaluation of paid options only**; §6b covers genuinely free options. If no free option can run the complete application reliably, staging deployment is **deferred** and development continues through GitHub. **Nothing is provisioned; any provisioning — even free — waits for the owner's explicit approval.**
 
+## 0. Current strategy (owner direction, 2026-11-07 — D-035): GitHub first, live staging deferred
+
+1. **GitHub is the primary access and review location.** All source code, documentation, architecture, issues and progress stay in https://github.com/PyroNet-Solutions/KK-Farm; the owner reviews directly through repository and PR links listed in [GITHUB_REVIEW_GUIDE.md](GITHUB_REVIEW_GUIDE.md).
+2. **Screenshots and visual previews** are kept in GitHub (`docs/assets/`, PR descriptions, workflow artifacts) — synthetic content only.
+3. **GitHub Pages** may be used only for static documentation or static frontend prototypes, if suitable and without paid resources, and is **never** represented as a functional Laravel application (see GITHUB_REVIEW_GUIDE §6; availability on this private repo unconfirmed, not configured).
+4. **No purchases, no paid resources, nothing that can generate charges** (D-033).
+5. **The complete live staging environment remains a future milestone**, subject to finding a genuinely free solution (§6b). Gate G-STAGE is deferred accordingly; live application testing will be arranged later.
+
 ## 1. Required outcome
 
 Once the complete MVP is implemented and passes its automated tests, Ammar must be able to test it **online over HTTPS** (e.g. `https://kk-farm-staging.<domain>`) from a desktop browser and a mobile browser, with different roles — **before** anything is deployed to the farm's VM. The staging application is a **mandatory acceptance milestone** (gate **G-STAGE**) in the roadmap; the farm VM is never deployed automatically and staging is never treated as production.

@@ -93,7 +93,9 @@ Scope:
 
 **Gate G5:** CEO reconciles one full month against existing records.
 
-## Gate G-STAGE — Live staging acceptance (mandatory before any farm-VM deployment)
+## Gate G-STAGE — Live staging acceptance (mandatory before any farm-VM deployment) — **deferred milestone, $0 only**
+
+> Per D-033/D-035 (2026-11-07): review and acceptance of all work happens **through GitHub** ([GITHUB_REVIEW_GUIDE.md](GITHUB_REVIEW_GUIDE.md)). The live staging environment is a future milestone that proceeds only if a genuinely free solution (no card, no auto-charge) can run the complete application reliably; otherwise it stays deferred and the limitation is documented. Static documentation / prototype previews on GitHub Pages (if available free) do not count as staging.
 
 When the integrated MVP (Phases 1–5 as scoped by the owner) passes CI, it is deployed — after CI success **and** Ammar's explicit approval in GitHub — to the shared **staging environment** ([STAGING_ENVIRONMENT.md](STAGING_ENVIRONMENT.md)): full stack, synthetic demo data, role test accounts, simulated RFID reader. Ammar tests from desktop and mobile; the QA Lead reviews the acceptance package (URL, SHA, test results, manual QA checklist, limitations, cost, bug process). Only after G-STAGE is signed off does the production (farm VM) runbook begin, and never automatically.
 

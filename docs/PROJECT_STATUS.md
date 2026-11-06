@@ -4,6 +4,10 @@
 **Phase:** 0 — Discovery & repository foundation
 **Next milestone:** Farm visit → requirements review → stack decision → approval to start Phase 1
 
+## How to review (owner direction 2026-11-07)
+
+Everything is reviewed **through GitHub** — see [GITHUB_REVIEW_GUIDE.md](GITHUB_REVIEW_GUIDE.md) for direct links to every PR, branch, issue and document. Live application testing is a **future milestone** subject to a genuinely free hosting solution; budget is **$0**.
+
 ## Summary for stakeholders
 
 The repository exists and the discovery documentation set is in place. Requirements from the project brief have been captured and separated into *confirmed*, *assumed* and *unknown*. The system shape (architecture, data model, roles, RFID approach, AI guard-rails, roadmap) has been **proposed** so that it can be challenged during and after the farm visit. No software has been built, and none should be until the farm-visit findings are approved.
@@ -22,6 +26,7 @@ The repository exists and the discovery documentation set is in place. Requireme
 - [x] Technology evaluation with verified latest-stable versions and two compared stacks — [TECHNOLOGY_EVALUATION.md](TECHNOLOGY_EVALUATION.md) (D-023…D-030, Proposed)
 - [x] Performance acceptance criteria — [PERFORMANCE_ACCEPTANCE_CRITERIA.md](PERFORMANCE_ACCEPTANCE_CRITERIA.md) (D-022)
 - [x] Live staging environment requirement recorded (D-031) with a Laravel Cloud vs Railway evaluation (reference only). **Paid hosting approval withdrawn the same day — budget is $0 (D-032 Rejected, D-033).** Free-hosting research in progress; staging may be deferred if nothing free can run the complete app — [STAGING_ENVIRONMENT.md](STAGING_ENVIRONMENT.md) §6b. Nothing provisioned.
+- [x] **GitHub-first review strategy recorded (D-035)** — [GITHUB_REVIEW_GUIDE.md](GITHUB_REVIEW_GUIDE.md) with links to every PR/branch/issue/document; screenshots policy; GitHub Pages scoped to static docs/prototypes only (availability on the private repo unconfirmed, not configured); live staging deferred as a future $0 milestone
 - [x] **Fundamental project principles recorded (D-034)** — original product built from scratch, competitors for inspiration only, frameworks as tools with licences documented, complete ownership and portability, zero budget, discovery before development, SaaS-ready architecture — [PROJECT_PRINCIPLES.md](PROJECT_PRINCIPLES.md); dependency/licence register started in [DEPENDENCIES_AND_LICENSES.md](DEPENDENCIES_AND_LICENSES.md).
 - [x] Verified competitor benchmark of Throf, Farmbrite, UNIFORM Goat (site blocked — unverified), PeakHerds, UBIQ vs. all KK Farm requirements, with the ten gaps none address — [research/COMPETITOR_BENCHMARK.md](research/COMPETITOR_BENCHMARK.md)
 - [x] On-Site Discovery Pack for the farm visit — [farm-visit/](farm-visit/) (field guide, blank templates, RFID inspection checklist, role interviews, prioritised questions)

@@ -6,6 +6,10 @@
 
 KK Farm is a professional goat breeding operation. This repository is the single source of truth for the software platform that will manage every goat through its complete lifecycle — identity, pedigree, genetics, breeding, veterinary health, nutrition, weight, finances and day-to-day farm operations — in a way that is easy to use on a mobile phone by staff with limited technical training.
 
+## How to review this project
+
+All review happens **in GitHub** — repository, PRs, issues and documents. Direct links to every open PR, branch, issue and file: **[docs/GITHUB_REVIEW_GUIDE.md](docs/GITHUB_REVIEW_GUIDE.md)**. Live application testing is a future milestone, subject to a genuinely free hosting solution; the budget is **$0** and nothing here creates charges.
+
 ## Where things stand
 
 | Item | Status |
@@ -39,7 +43,7 @@ Read in this order if you are new:
 11a. [TEAM_WORKFLOW.md](docs/TEAM_WORKFLOW.md) · [TESTING_STRATEGY.md](docs/TESTING_STRATEGY.md) · [CI_PIPELINE_PROPOSAL.md](docs/CI_PIPELINE_PROPOSAL.md) — how the team works, tests and validates PRs
 11b. [TECHNOLOGY_EVALUATION.md](docs/TECHNOLOGY_EVALUATION.md) — two stacks compared with verified latest-stable versions; recommendation (proposed)
 11d. [STAGING_ENVIRONMENT.md](docs/STAGING_ENVIRONMENT.md) — mandatory live-staging acceptance milestone; paid-hosting evaluation kept as reference only; **budget $0 — free options under research (D-033)**; staging deferred if nothing free is reliable
-0. [PROJECT_PRINCIPLES.md](docs/PROJECT_PRINCIPLES.md) · [DEPENDENCIES_AND_LICENSES.md](docs/DEPENDENCIES_AND_LICENSES.md) — fundamental principles (original product, ownership, $0 budget) and the dependency/licence register
+0. [PROJECT_PRINCIPLES.md](docs/PROJECT_PRINCIPLES.md) · [DEPENDENCIES_AND_LICENSES.md](docs/DEPENDENCIES_AND_LICENSES.md) · [GITHUB_REVIEW_GUIDE.md](docs/GITHUB_REVIEW_GUIDE.md) — fundamental principles, dependency/licence register, and the review guide with direct links
 11c. [PERFORMANCE_ACCEPTANCE_CRITERIA.md](docs/PERFORMANCE_ACCEPTANCE_CRITERIA.md) · [REALTIME_ARCHITECTURE.md](docs/REALTIME_ARCHITECTURE.md) · [MEDIA_AND_PHOTOS.md](docs/MEDIA_AND_PHOTOS.md) · [SHARED_VM_ARCHITECTURE.md](docs/SHARED_VM_ARCHITECTURE.md) — speed targets, live updates, goat photographs, shared-VM isolation
 12. [docs/research/](docs/research/) — competitor and workbook analysis, the [platform & repository comparison](docs/research/PLATFORM_COMPARISON.md) (licensing and reuse feasibility) and the [five-product competitor benchmark](docs/research/COMPETITOR_BENCHMARK.md) (feature matrix and the gaps KK Farm must own)
 13. [docs/farm-visit/](docs/farm-visit/) — **On-Site Discovery Pack**: [field guide](docs/farm-visit/FARM_VISIT_FIELD_GUIDE.md) · [blank data-capture templates](docs/farm-visit/FARM_DATA_CAPTURE_TEMPLATES.md) · [RFID hardware inspection](docs/farm-visit/RFID_HARDWARE_INSPECTION.md) · [workflow interviews & observation](docs/farm-visit/FARM_WORKFLOW_DISCOVERY.md) · [prioritised open questions](docs/farm-visit/FARM_VISIT_OPEN_QUESTIONS.md)
