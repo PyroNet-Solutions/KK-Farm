@@ -21,6 +21,7 @@ The repository exists and the discovery documentation set is in place. Requireme
 - [x] Testing structure and CI pipeline proposed for the QA Lead to own — [TESTING_STRATEGY.md](TESTING_STRATEGY.md), [CI_PIPELINE_PROPOSAL.md](CI_PIPELINE_PROPOSAL.md) (D-018, Proposed)
 - [x] Technology evaluation with verified latest-stable versions and two compared stacks — [TECHNOLOGY_EVALUATION.md](TECHNOLOGY_EVALUATION.md) (D-023…D-030, Proposed)
 - [x] Performance acceptance criteria — [PERFORMANCE_ACCEPTANCE_CRITERIA.md](PERFORMANCE_ACCEPTANCE_CRITERIA.md) (D-022)
+- [x] On-Site Discovery Pack for the farm visit — [farm-visit/](farm-visit/) (field guide, blank templates, RFID inspection checklist, role interviews, prioritised questions)
 - [x] Real-time, media/photos and shared-VM designs — [REALTIME_ARCHITECTURE.md](REALTIME_ARCHITECTURE.md), [MEDIA_AND_PHOTOS.md](MEDIA_AND_PHOTOS.md), [SHARED_VM_ARCHITECTURE.md](SHARED_VM_ARCHITECTURE.md)
 
 ## In progress / blocked
@@ -40,7 +41,7 @@ The repository exists and the discovery documentation set is in place. Requireme
 ## Next steps
 
 1. Share the Excel workbook → complete workbook analysis → update domain model and open questions.
-2. Farm visit: use [OPEN_QUESTIONS.md](OPEN_QUESTIONS.md) as the interview checklist. Inspect the RFID reader (photograph the label, note model, OS version, any vendor app).
+2. Farm visit: use the **On-Site Discovery Pack** in [farm-visit/](farm-visit/) — [field guide](farm-visit/FARM_VISIT_FIELD_GUIDE.md), [templates](farm-visit/FARM_DATA_CAPTURE_TEMPLATES.md), [RFID inspection](farm-visit/RFID_HARDWARE_INSPECTION.md), [interviews](farm-visit/FARM_WORKFLOW_DISCOVERY.md), [prioritised questions](farm-visit/FARM_VISIT_OPEN_QUESTIONS.md). Answers flow back into [OPEN_QUESTIONS.md](OPEN_QUESTIONS.md).
 3. Review this documentation set with the CEO and veterinary staff; confirm or correct every `[ASSUMED]` item.
 4. Decide the technology stack and hosting environment; record in [DECISIONS_LOG.md](DECISIONS_LOG.md).
 5. Only then: authorise Phase 1 of the [IMPLEMENTATION_ROADMAP.md](IMPLEMENTATION_ROADMAP.md).

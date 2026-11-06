@@ -147,6 +147,8 @@ The brief lists these as pending — **do not invent answers**: employee count &
 
 ## How to use during the farm visit
 
+The practical visit kit lives in [farm-visit/](farm-visit/): [FARM_VISIT_FIELD_GUIDE.md](farm-visit/FARM_VISIT_FIELD_GUIDE.md) (sequence and what to observe), [FARM_DATA_CAPTURE_TEMPLATES.md](farm-visit/FARM_DATA_CAPTURE_TEMPLATES.md) (blank forms), [RFID_HARDWARE_INSPECTION.md](farm-visit/RFID_HARDWARE_INSPECTION.md), [FARM_WORKFLOW_DISCOVERY.md](farm-visit/FARM_WORKFLOW_DISCOVERY.md) (interviews by role) and [FARM_VISIT_OPEN_QUESTIONS.md](farm-visit/FARM_VISIT_OPEN_QUESTIONS.md) (this list, prioritised P0–P3). This file remains the master record of answers.
+
 1. Walk the shed first; photograph registers, tags, reader, scale, feed store.
 2. Go through sections A–I with the relevant person; write answers directly in this file on a branch.
 3. Anything surprising → add a new question rather than guessing.
