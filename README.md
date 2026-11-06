@@ -34,6 +34,7 @@ Read in this order if you are new:
 9. [AI_INTELLIGENCE_DESIGN.md](docs/AI_INTELLIGENCE_DESIGN.md) — advisory intelligence layer, guard-rails
 10. [IMPLEMENTATION_ROADMAP.md](docs/IMPLEMENTATION_ROADMAP.md) — recommended phases
 11. [DECISIONS_LOG.md](docs/DECISIONS_LOG.md) — decisions taken, with reasons
+11a. [TEAM_WORKFLOW.md](docs/TEAM_WORKFLOW.md) · [TESTING_STRATEGY.md](docs/TESTING_STRATEGY.md) · [CI_PIPELINE_PROPOSAL.md](docs/CI_PIPELINE_PROPOSAL.md) — how the team works, tests and validates PRs
 12. [docs/research/](docs/research/) — competitor and workbook analysis, and the [platform & repository comparison](docs/research/PLATFORM_COMPARISON.md) (licensing and reuse feasibility)
 
 ## Ground rules for this phase
@@ -48,19 +49,28 @@ These come from the project brief and are **mandatory**:
 - **No Pull Request is merged without explicit authorization from the project owner.**
 - No destructive Git operations (force-push, history rewrite, branch deletion of others' work).
 
-## How to contribute
+## Team and how we work
+
+| Who | Role |
+|-----|------|
+| **Ammar** | Project Owner / CEO — final business & technical decisions, approves every merge and deployment |
+| **Claude Code** | Lead Software Engineer — implementation, migrations, APIs, real-time, RFID, photos, UI, automated tests, CI configuration |
+| **ChatGPT** | GitHub Engineering Manager, Independent Reviewer & QA Lead — issues/labels/milestones, independent PR review, testing strategy and quality gates |
+
+Full workflow, approval boundaries and collaboration rules: [docs/TEAM_WORKFLOW.md](docs/TEAM_WORKFLOW.md). Testing structure: [docs/TESTING_STRATEGY.md](docs/TESTING_STRATEGY.md). CI: [docs/CI_PIPELINE_PROPOSAL.md](docs/CI_PIPELINE_PROPOSAL.md).
 
 ```
-main                      ← protected; only merged via authorized PR
+main                      ← protected; only merged via PR authorised by Ammar
 └── docs/<topic>          ← documentation branches
-└── feat/<topic>          ← future feature branches (not before approval)
+└── feat/<issue>-<slug>   ← feature branches (not before Phase 1 approval)
+└── fix/<issue>-<slug>    ← bug fixes (always with a regression test)
 ```
 
-1. Branch from `main`.
-2. Keep confirmed facts, assumptions and open questions clearly labelled (`[CONFIRMED]`, `[ASSUMED]`, `[UNKNOWN]`).
-3. Record any decision in `DECISIONS_LOG.md` with the reason.
-4. Open a PR using the template; link the GitHub Issue it addresses.
-5. Wait for explicit merge authorization.
+1. Start from a GitHub issue with acceptance criteria (created/approved by ChatGPT and Ammar).
+2. Branch; keep facts labelled (`[CONFIRMED]`, `[ASSUMED]`, `[UNKNOWN]`); record decisions in `docs/DECISIONS_LOG.md`.
+3. Write tests with the code; push early so CI and the reviewer can see it.
+4. Open a PR with the template, `Closes #N`; respond to every review finding in the thread.
+5. CI green + review resolved → wait for Ammar's explicit merge authorisation.
 
 ## Glossary (for non-technical readers)
 

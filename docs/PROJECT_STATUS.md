@@ -17,6 +17,8 @@ The repository exists and the discovery documentation set is in place. Requireme
 - [x] Domain model, architecture proposal, database draft, security/RBAC, RFID research, AI design, roadmap, decisions log drafted
 - [x] Issue and PR templates added
 - [x] Platform & repository comparison with licensing and reuse feasibility — [research/PLATFORM_COMPARISON.md](research/PLATFORM_COMPARISON.md) (proposes D-016: custom build, reuse open standards, no GPL fork)
+- [x] Team workflow and approval boundaries recorded — [TEAM_WORKFLOW.md](TEAM_WORKFLOW.md) (D-017): Ammar decides/merges, Claude implements code + tests + CI, ChatGPT is independent GitHub manager, reviewer and QA lead
+- [x] Testing structure and CI pipeline proposed for the QA Lead to own — [TESTING_STRATEGY.md](TESTING_STRATEGY.md), [CI_PIPELINE_PROPOSAL.md](CI_PIPELINE_PROPOSAL.md) (D-018, Proposed)
 
 ## In progress / blocked
 
@@ -25,7 +27,8 @@ The repository exists and the discovery documentation set is in place. Requireme
 | Excel workbook analysis | **Blocked** | `KK_Farms_360_Goat_Management_System.xlsx` has not been supplied to the engineering side. Placeholder at [research/EXCEL_WORKBOOK_ANALYSIS.md](research/EXCEL_WORKBOOK_ANALYSIS.md). | CEO / project owner to share the file |
 | Competitor review (goatmart.pk) | **Partially blocked** | Site returned "deployment paused" on 2026-11-07 and has no web archive. | Re-check later; or CEO to share screenshots / app name |
 | RFID hardware capability | **Blocked** | Reader make/model and SDK unknown until inspected. | Farm visit |
-| Technology stack decision | **Open** | Depends on CEO preference, hosting constraints and RFID SDK platform. | CEO + engineering |
+| Technology stack decision | **Open** | Depends on CEO preference, hosting constraints and RFID SDK platform. A technology evaluation with verified latest-stable versions and two compared stacks is in progress (see [TECHNOLOGY_EVALUATION.md](TECHNOLOGY_EVALUATION.md) when it lands). | CEO + engineering |
+| Premium / real-time / performance / photo requirements | **In progress** | New owner direction (2026-11-07) being folded into requirements, architecture and acceptance criteria. | Claude |
 
 ## Not started (by design)
 
