@@ -26,6 +26,7 @@
 | Real-time is core | RT-1…RT-4 | Transactional outbox → broker → dedicated WebSocket service with per-channel authorisation; sub-second p95 |
 | Premium UI with photos | UX-1…UX-7, PH-1…PH-9 | Design system (Tailwind + accessible primitives), Motion animations with reduced-motion, interactive pedigree tree, imgproxy-served responsive images from object storage |
 | Shared VM, loosely coupled | INF-1…INF-3 | Separate Compose projects, DBs, credentials, buckets, backups; everything located by configuration |
+| Original product; ownership; no lock-in; future farms/SaaS | P-1…P-7 (D-034) | Greenfield code owned in GitHub; provider services only behind standard interfaces (S3, Redis protocol, SMTP, PostgreSQL); `farm_id`-ready top-level entities; portable to any host or our VM |
 
 ## 2. Proposed shape (logical view)
 

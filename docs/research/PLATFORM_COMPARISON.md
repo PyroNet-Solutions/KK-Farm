@@ -1,5 +1,7 @@
 # Platform & Repository Comparison — Licensing and Reuse Feasibility
 
+> **Principle P-1/P-2 (D-034, 2026-11-07):** KK Farm is built from scratch as PyroNet Solutions' own product. The "reuse" question in this document is answered **no code reuse from any application**; open standards (e.g. ICAR ADE) and permissive libraries are tools, and the platforms below are studied for ideas only.
+
 **Date:** 2026-11-07 · **Status:** Research v0.1 · **Decision input for:** D-016 (build vs. adopt vs. borrow)
 
 ## 1. Purpose and method

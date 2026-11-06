@@ -1,5 +1,7 @@
 # Competitor Benchmark — Five International Goat/Herd Platforms vs. KK Farm Requirements
 
+> **Inspiration only (principle P-2, D-034).** These products are research references for features, workflows, UX, strengths and gaps. KK Farm is an original product built from scratch; nothing here authorises copying source code, designs, screens, branding or assets.
+
 **Date:** 2026-11-07 · **Status:** Research v0.1 · **Builds on:** [PLATFORM_COMPARISON.md](PLATFORM_COMPARISON.md) (licensing/reuse) and the owner's shortlist of five products (Throf, Farmbrite, UNIFORM-Agri Goat, PeakHerds, UBIQ by Seenovia).
 
 ## 1. Method and evidence quality

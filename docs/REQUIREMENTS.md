@@ -258,6 +258,17 @@ The owner confirmed on 2026-11-07 that KK Farm must be a **premium, real-time li
 | STG-5 | Evaluate managed hosting (Laravel Cloud, Railway first) on Laravel/PostgreSQL compatibility, workers & scheduling, WebSockets, persistent storage, HTTPS/custom domains, Asia region & latency, monthly cost, backup/recovery, deploy/rollback; **no paid resources, domains or payment details without Ammar's approval**. | `[CONFIRMED]` |
 | STG-6 | Acceptance package: live URL, repo + deployed SHA, test-account instructions, automated test results, manual QA checklist, known limitations, estimated monthly cost, bug-reporting instructions. | `[CONFIRMED]` |
 
+## 13. Ownership, originality and budget (OWN) — [PROJECT_PRINCIPLES.md](PROJECT_PRINCIPLES.md)
+
+| ID | Requirement | Status |
+|----|-------------|--------|
+| OWN-1 | KK Farm is PyroNet Solutions' own original product, built from scratch; no purchase, resale, rebranding, white-labelling, forking or modification of an existing livestock application. | `[CONFIRMED]` (owner, 2026-11-07) |
+| OWN-2 | Competitor products are inspiration only; no copying of proprietary code, designs, branding or assets. | `[CONFIRMED]` |
+| OWN-3 | Frameworks, libraries, database engines and infrastructure components are tools; each third-party dependency is documented with licence and security considerations. | `[CONFIRMED]` → [DEPENDENCIES_AND_LICENSES.md](DEPENDENCIES_AND_LICENSES.md) |
+| OWN-4 | Source code, schema & migrations, business rules, API contracts, configuration, documentation, deployment process and data export/backup procedures remain under PyroNet Solutions' control; the application is portable between hosting providers and our own VM. | `[CONFIRMED]` |
+| OWN-5 | Development and staging infrastructure budget is **$0**: no purchases, subscriptions, paid domains, paid services, paid trials, payment methods, or resources that can generate charges. Staging URL requirement stands but is deferred if it cannot be met free of charge. | `[CONFIRMED]` (supersedes any paid-hosting reading of STG-5) |
+| OWN-6 | Architecture supports future farms and commercial SaaS expansion without redesign (tenant-ready data model, configuration-driven deployment). | `[CONFIRMED]` |
+
 ## Explicitly out of scope (for now)
 
 - Public marketplace / selling goats online (goatmart-style features) — unless the CEO asks.

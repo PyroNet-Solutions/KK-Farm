@@ -1,6 +1,6 @@
 # Live Staging Environment — Owner Testing Milestone
 
-**Status:** Requirement accepted (D-031, owner instruction 2026-11-07); hosting choice **Accepted — Railway, Singapore (D-032, 2026-11-07)**. **Nothing is provisioned yet, no account created, no payment details entered**: provisioning happens only when the MVP approaches gate G-STAGE, and the account, plan and payment method are set up by Ammar himself (see §6a).
+**Status:** Requirement accepted (D-031, owner instruction 2026-11-07). **Hosting budget: $0 (D-033).** The Railway paid-plan approval (D-032) was **withdrawn by the owner on 2026-11-07** — no paid subscriptions, no credit card or payment method, no paid trials, no account creation or provisioning that could generate charges, no domain purchases. §5–6a below are retained as a **reference evaluation of paid options only**; §6b covers genuinely free options. If no free option can run the complete application reliably, staging deployment is **deferred** and development continues through GitHub. **Nothing is provisioned; any provisioning — even free — waits for the owner's explicit approval.**
 
 ## 1. Required outcome
 
@@ -79,9 +79,9 @@ Evaluated for the approved-pending architecture (Laravel 13 + PostgreSQL 18 + Va
 | 2 | **Laravel Cloud Starter, Singapore** | Best Laravel ergonomics (managed Reverb, Horizon, scheduler, R2 storage as toggles) and PR previews; 2–3× the cost; Postgres 17 (18 unconfirmed) breaks version parity; rollback not documented. Choose if the spike shows Reverb-on-Railway is troublesome and the owner accepts PG 17 on staging. |
 | 3 | **Hetzner VPS + production Compose stack** | Required anyway as a **pre-production rehearsal** (restore + portability drill, SHARED_VM_ARCHITECTURE §4) before the farm VM; could double as staging if the team prefers full parity over managed convenience. |
 
-**Decision taken (2026-11-07):** Option 1 — Railway, Singapore, Hobby plan, budget ≈ $18–25/month (D-032 Accepted).
+**Decision history (2026-11-07):** Option 1 was accepted in the morning and **withdrawn by the owner the same day** — the paid Hobby plan and the ≈ $18–25/month budget are **not approved** (D-032 Rejected; D-033 sets the budget to $0). The blueprint in §6a is kept only as a reference for *if and when* the owner ever approves paid hosting; it is **not** to be executed.
 
-## 6a. Approved staging blueprint on Railway (to be executed only at gate G-STAGE)
+## 6a. Reference blueprint for a paid Railway deployment — NOT APPROVED, NOT TO BE EXECUTED
 
 | Item | Plan |
 |------|------|
@@ -96,6 +96,12 @@ Evaluated for the approved-pending architecture (Laravel 13 + PostgreSQL 18 + Va
 | Access | `noindex`; rate limiting; optional basic-auth gate (Q-STG-5) |
 | Cost control | Hobby plan; spending limit; monthly invoice reported in the acceptance package; upgrade to Pro only with approval |
 | Exit criteria for the choice | If the Phase 1 spike shows Reverb or the scheduler pattern unworkable on Railway, fall back to Laravel Cloud (Option 2) via a new decision row |
+
+## 6b. Genuinely free hosting options ($0, no payment method) — research in progress
+
+Criteria (owner, 2026-11-07): $0 cost; **no credit card or payment method at signup**; no paid trials; no account that can auto-charge; no domain purchase. The research must state, per option: what runs free (web, worker, scheduler, WebSockets, PostgreSQL, Redis, object storage), sleeping/idle behaviour, database expiry or pause rules, resource limits, regions, and whether the **complete** application can run reliably. Options that are free only with a card on file are listed separately as **excluded**.
+
+*Findings will be inserted here when the research completes; the decision row is D-033.*
 
 ## 7. Acceptance package (delivered before declaring staging ready)
 

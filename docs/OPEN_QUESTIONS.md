@@ -144,7 +144,7 @@ The brief lists these as pending — **do not invent answers**: employee count &
 | Q-BC-4 | Has the CEO personally used any of the five benchmark products; which flows impressed or frustrated? | Direct UX input. | CEO | P2+ | |
 | Q-BC-5 | Must Urdu right-to-left layout be first-class from day one (as Throf does Arabic)? | i18n/RTL design effort. | CEO | P1 | |
 | Q-BC-3 | Future data exchange with a breed registry, PAITS or buyers? | ICAR ADE alignment priority. | CEO | P2+ | |
-| Q-STG-1 | Approve staging provider / plan / region / monthly budget (D-032: Railway Singapore recommended, Laravel Cloud second)? | Nothing can be provisioned without it. | CEO | P1 (before MVP completion) | **Answered 2026-11-07: Railway, Singapore, Hobby, ≈ $18–25/mo (D-032 Accepted). Account/payment to be created by the CEO at gate G-STAGE; nothing provisioned yet.** |
+| Q-STG-1 | Approve staging provider / plan / region / monthly budget (D-032: Railway Singapore recommended, Laravel Cloud second)? | Nothing can be provisioned without it. | CEO | P1 (before MVP completion) | **Approval WITHDRAWN 2026-11-07 (D-032 Rejected). Budget is $0 (D-033): no paid plan, no card, no paid trial, no provisioning that can charge. Re-asked as: which genuinely free option (if any) may be provisioned once research is in — see STAGING_ENVIRONMENT §6b.** |
 | Q-STG-2 | Is PostgreSQL 17 acceptable on staging if Laravel Cloud is chosen, or is PG 18 parity mandatory? | Provider choice. | CEO + engineering | P1 | |
 | Q-STG-3 | Staging domain (subdomain of the farm's future domain vs provider default)? | DNS, TLS, cost. | CEO | P2+ | |
 | Q-STG-4 | Who gets staging accounts besides the CEO (vets, QA Lead)? | Account provisioning. | CEO | P2+ | |
