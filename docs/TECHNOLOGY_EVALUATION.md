@@ -1,6 +1,6 @@
 # Technology Evaluation
 
-**Status:** Proposed (D-023 and related). Research date **2026-11-07**. Versions were verified against official release notes, GitHub releases, package registries and endoflife.date by three parallel research passes; every table row cites its source. Anything not verifiable is marked. **This is a recommendation for the owner's approval, not a decision** (D-011 remains open until Ammar accepts).
+**Status:** **Option A accepted by the owner on 2026-11-07 (D-023, resolving D-011)**, together with Valkey (D-025), Reverb (D-030), Horizon, imgproxy + Garage (D-029, D-024), Caddy and Docker Compose (D-027). Still *Proposed*: performance targets (D-022), observability stack (D-026), mobile delivery (D-028 — waits for the RFID reader inspection). Research date **2026-11-07**; versions were verified against official release notes, GitHub releases, package registries and endoflife.date by three parallel research passes; every table row cites its source. Versions are re-verified before the Phase 1 spike (§6). Acceptance does not authorise development: gate G0 (farm-visit review) still applies.
 
 Selection rules (owner direction): latest **stable** only; actively maintained, production-ready; no deprecated/abandoned/RC/experimental choices; compare ≥ 2 viable stacks; weigh maintainability, ecosystem maturity, performance, security and the team's ability to maintain it.
 

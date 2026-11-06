@@ -1,6 +1,6 @@
 # Architecture Proposal
 
-**Status:** PROPOSAL — not a decision. The technology stack and deployment environment are `[UNKNOWN]` (Q-NFR-3). This document gives a recommended shape and the reasoning so the CEO and engineering team can decide after the farm visit.
+**Status:** Architectural shape proposed; **technology stack accepted on 2026-11-07 (D-023, Option A — see [TECHNOLOGY_EVALUATION.md](TECHNOLOGY_EVALUATION.md))**. Deployment environment for production is still open (Q-NFR-3 hosting part; shared-VM principles in D-021); mobile delivery (D-028) waits for the reader inspection. This document keeps the reasoning and the alternatives considered.
 
 > **Updated 2026-11-07** for the owner's premium / real-time / performance direction. The detailed designs now live in companion documents, and this proposal references them:
 > - Concrete stack recommendation with verified versions → [TECHNOLOGY_EVALUATION.md](TECHNOLOGY_EVALUATION.md)

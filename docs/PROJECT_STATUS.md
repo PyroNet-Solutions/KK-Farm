@@ -33,7 +33,7 @@ The repository exists and the discovery documentation set is in place. Requireme
 | Excel workbook analysis | **Blocked** | `KK_Farms_360_Goat_Management_System.xlsx` has not been supplied to the engineering side. Placeholder at [research/EXCEL_WORKBOOK_ANALYSIS.md](research/EXCEL_WORKBOOK_ANALYSIS.md). | CEO / project owner to share the file |
 | Competitor review (goatmart.pk) | **Partially blocked** | Site returned "deployment paused" on 2026-11-07 and has no web archive. | Re-check later; or CEO to share screenshots / app name |
 | RFID hardware capability | **Blocked** | Reader make/model and SDK unknown until inspected. | Farm visit |
-| Technology stack decision | **Open** | Depends on CEO preference, hosting constraints and RFID SDK platform. A technology evaluation with verified latest-stable versions and two compared stacks is in progress (see [TECHNOLOGY_EVALUATION.md](TECHNOLOGY_EVALUATION.md) when it lands). | CEO + engineering |
+| Technology stack decision | **Decided** — Option A accepted 2026-11-07 (D-023; see [TECHNOLOGY_EVALUATION.md](TECHNOLOGY_EVALUATION.md)) | Owner to confirm on GitHub (PR #18 / issue #3). Mobile delivery (D-028) and staging host (D-032) still open. Development still gated on G0. | Ammar (GitHub confirmation) |
 | Premium / real-time / performance / photo requirements | **Documented, awaiting review** | Folded into REQUIREMENTS §11 and the new design docs; decisions D-019…D-030 (D-019/020/021 accepted as owner direction, the rest *Proposed*). | Ammar to review |
 
 ## Not started (by design)

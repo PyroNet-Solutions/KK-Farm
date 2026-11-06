@@ -119,7 +119,7 @@ The brief lists these as pending — **do not invent answers**: employee count &
 |----|----------|----------------|-----|--------|--------|
 | Q-NFR-1 | Is offline operation required? (see Q-FM-3) | Architecture. | CEO | P1 | |
 | Q-NFR-2 | Languages: Urdu, English, others (Punjabi, Sindhi)? Script preference? | i18n. | CEO | P1 | |
-| Q-NFR-3 | Preferred technology stack and hosting (cloud, on-prem, existing PyroNet infra later)? | Stack decision. | CEO + engineering | P1 | |
+| Q-NFR-3 | Preferred technology stack and hosting (cloud, on-prem, existing PyroNet infra later)? | Stack decision. | CEO + engineering | P1 | **Stack: answered 2026-11-07 — Option A accepted (D-023).** Production hosting/VM provider still open (Q-INF-1); staging host pending D-032. |
 | Q-NFR-4 | Backup/retention expectations; any regulatory record-keeping requirement? | Data policy. | CEO | P2+ | |
 
 ## L. Premium / real-time / photos / infrastructure (added 2026-11-07)

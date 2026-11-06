@@ -14,7 +14,7 @@ KK Farm is a professional goat breeding operation. This repository is the single
 | Excel workbook (`KK_Farms_360_Goat_Management_System.xlsx`) | **Not yet received** — analysis pending |
 | Competitor review (goatmart.pk) | Site offline at time of review — see [research note](docs/research/COMPETITOR_GOATMART.md) |
 | RFID hardware | Make/model unknown — see [RFID research](docs/RFID_INTEGRATION_RESEARCH.md) |
-| Technology stack | **Not decided** — recommendation with verified versions in [TECHNOLOGY_EVALUATION.md](docs/TECHNOLOGY_EVALUATION.md), awaiting Ammar's approval |
+| Technology stack | **Decided 2026-11-07 (D-023):** Laravel 13 + Octane · Inertia 3 + React 19 · PostgreSQL 18 · Valkey 9 · Reverb · Horizon · imgproxy + Garage · Caddy · Docker Compose — see [TECHNOLOGY_EVALUATION.md](docs/TECHNOLOGY_EVALUATION.md). Mobile delivery and hosting still open. |
 | Product direction | **Premium, real-time livestock intelligence platform** — every goat with its own digital identity, photographs, medical/breeding history and complete lifecycle record (owner, 2026-11-07) |
 | Application code | None. Development does not start until farm-visit findings are reviewed and approved. |
 

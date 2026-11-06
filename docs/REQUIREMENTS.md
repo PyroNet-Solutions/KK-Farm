@@ -175,7 +175,7 @@ Requirement IDs are stable: `AM` = Animal Management, `PB` = Pedigree & Breeding
 | NFR-6 | Data model must scale 10×–50× in animals and sheds without redesign. | `[CONFIRMED]` |
 | NFR-7 | Daily backups; restore tested. | `[ASSUMED]` |
 | NFR-8 | Role-based access enforced on the server, not just hidden in the UI. | `[CONFIRMED]` (FN-12) |
-| NFR-9 | Preferred technology stack and deployment environment. | `[UNKNOWN]` → Q-NFR-3 |
+| NFR-9 | Preferred technology stack and deployment environment. | Stack `[CONFIRMED]` 2026-11-07 (D-023 Option A); production hosting still `[UNKNOWN]` → Q-NFR-3 |
 
 ## 11. Premium platform direction (owner, 2026-11-07)
 
