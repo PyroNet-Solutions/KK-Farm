@@ -1,2 +1,75 @@
-# KK-Farm
-KK Farm - goat breeding and farm management platform (discovery phase)
+# KK Farm — Goat Breeding & Farm Management Platform
+
+> **Phase:** Discovery & repository foundation (no application code yet)
+> **Principle:** *Quality of goats, not quantity of goats.*
+
+KK Farm is a professional goat breeding operation. This repository is the single source of truth for the software platform that will manage every goat through its complete lifecycle — identity, pedigree, genetics, breeding, veterinary health, nutrition, weight, finances and day-to-day farm operations — in a way that is easy to use on a mobile phone by staff with limited technical training.
+
+## Where things stand
+
+| Item | Status |
+|------|--------|
+| Repository | Created 2026-11-07, private, `main` protected by PR workflow |
+| Requirements | Captured from the project brief; **not yet validated by a farm visit** |
+| Excel workbook (`KK_Farms_360_Goat_Management_System.xlsx`) | **Not yet received** — analysis pending |
+| Competitor review (goatmart.pk) | Site offline at time of review — see [research note](docs/research/COMPETITOR_GOATMART.md) |
+| RFID hardware | Make/model unknown — see [RFID research](docs/RFID_INTEGRATION_RESEARCH.md) |
+| Technology stack | **Not decided** — proposal only |
+| Application code | None. Development does not start until farm-visit findings are reviewed and approved. |
+
+See [PROJECT_STATUS.md](docs/PROJECT_STATUS.md) for the live status and [OPEN_QUESTIONS.md](docs/OPEN_QUESTIONS.md) for everything that still needs an answer.
+
+## Documentation map
+
+Read in this order if you are new:
+
+1. [PROJECT_STATUS.md](docs/PROJECT_STATUS.md) — what is done, what is blocked, what is next
+2. [REQUIREMENTS.md](docs/REQUIREMENTS.md) — confirmed requirements vs. assumptions, clearly separated
+3. [OPEN_QUESTIONS.md](docs/OPEN_QUESTIONS.md) — questions for the CEO, vets and staff
+4. [DOMAIN_MODEL.md](docs/DOMAIN_MODEL.md) — the "things" the system manages and how they relate
+5. [ARCHITECTURE_PROPOSAL.md](docs/ARCHITECTURE_PROPOSAL.md) — proposed system shape (proposal, not decision)
+6. [DATABASE_DESIGN_DRAFT.md](docs/DATABASE_DESIGN_DRAFT.md) — draft tables and history strategy
+7. [SECURITY_AND_RBAC.md](docs/SECURITY_AND_RBAC.md) — roles, permissions, audit trails
+8. [RFID_INTEGRATION_RESEARCH.md](docs/RFID_INTEGRATION_RESEARCH.md) — how ear tags and the Android reader could connect
+9. [AI_INTELLIGENCE_DESIGN.md](docs/AI_INTELLIGENCE_DESIGN.md) — advisory intelligence layer, guard-rails
+10. [IMPLEMENTATION_ROADMAP.md](docs/IMPLEMENTATION_ROADMAP.md) — recommended phases
+11. [DECISIONS_LOG.md](docs/DECISIONS_LOG.md) — decisions taken, with reasons
+12. [docs/research/](docs/research/) — competitor and workbook analysis
+
+## Ground rules for this phase
+
+These come from the project brief and are **mandatory**:
+
+- GitHub is the source of truth. All documents and code live here.
+- No deployment anywhere. No production VM, no PyroNet infrastructure, no production database, no production credentials.
+- No connection to live farm hardware (RFID reader, tags).
+- No real employee, customer, animal or financial data in this repository — sample data only.
+- All changes go through feature branches and Pull Requests.
+- **No Pull Request is merged without explicit authorization from the project owner.**
+- No destructive Git operations (force-push, history rewrite, branch deletion of others' work).
+
+## How to contribute
+
+```
+main                      ← protected; only merged via authorized PR
+└── docs/<topic>          ← documentation branches
+└── feat/<topic>          ← future feature branches (not before approval)
+```
+
+1. Branch from `main`.
+2. Keep confirmed facts, assumptions and open questions clearly labelled (`[CONFIRMED]`, `[ASSUMED]`, `[UNKNOWN]`).
+3. Record any decision in `DECISIONS_LOG.md` with the reason.
+4. Open a PR using the template; link the GitHub Issue it addresses.
+5. Wait for explicit merge authorization.
+
+## Glossary (for non-technical readers)
+
+| Term | Meaning |
+|------|---------|
+| **Animal ID** | A permanent number the system gives each goat. Never changes, never reused — even after the goat leaves the farm. |
+| **RFID tag / EPC** | The electronic ear tag and the code it transmits. Tags are physical objects: they can fall off, be replaced, or be reused on another goat. That is why the tag code is *not* the goat's identity. |
+| **Sire / Dam** | Father / mother of a goat. |
+| **Kidding** | A doe giving birth. Kids are the offspring. |
+| **ADG** | Average Daily Gain — how much weight a goat gains per day between two weighings. |
+| **RBAC** | Role-Based Access Control — who is allowed to see or do what. |
+| **Audit trail** | A permanent record of who changed what, and when. Nothing financial is ever silently edited or deleted. |
