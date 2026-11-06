@@ -247,6 +247,17 @@ The owner confirmed on 2026-11-07 that KK Farm must be a **premium, real-time li
 | EP-2 | GitHub Actions validate every PR; critical checks must pass; failing tests are never skipped or weakened. | `[CONFIRMED]` |
 | EP-3 | Synthetic data only in tests and workflows; no secrets in logs. | `[CONFIRMED]` |
 
+## 12. Live staging environment — owner testing milestone (STG) — [STAGING_ENVIRONMENT.md](STAGING_ENVIRONMENT.md)
+
+| ID | Requirement | Status |
+|----|-------------|--------|
+| STG-1 | Before any farm-VM deployment, the complete MVP runs on a live HTTPS staging URL testable from desktop and mobile browsers with different roles — a **mandatory acceptance milestone**. | `[CONFIRMED]` (owner, 2026-11-07) |
+| STG-2 | Staging includes frontend, backend, auth/RBAC, PostgreSQL, queue workers & scheduler, real-time, photo/document storage, an RFID interface in **simulated reader mode**, demo dashboards and reports. | `[CONFIRMED]` |
+| STG-3 | Separate staging database with realistic **synthetic** demo data, clearly labelled as simulated; test accounts for CEO/Admin, Veterinarian, Farm employee, Finance; credentials documented securely, **never committed**. | `[CONFIRMED]` |
+| STG-4 | Separate development / staging / production configurations; automated tests and quality checks before staging deployment; PR previews where practical; staging deployment only after CI success **and explicit approval**; never auto-deploy to the farm VM; staging is never production. | `[CONFIRMED]` |
+| STG-5 | Evaluate managed hosting (Laravel Cloud, Railway first) on Laravel/PostgreSQL compatibility, workers & scheduling, WebSockets, persistent storage, HTTPS/custom domains, Asia region & latency, monthly cost, backup/recovery, deploy/rollback; **no paid resources, domains or payment details without Ammar's approval**. | `[CONFIRMED]` |
+| STG-6 | Acceptance package: live URL, repo + deployed SHA, test-account instructions, automated test results, manual QA checklist, known limitations, estimated monthly cost, bug-reporting instructions. | `[CONFIRMED]` |
+
 ## Explicitly out of scope (for now)
 
 - Public marketplace / selling goats online (goatmart-style features) — unless the CEO asks.

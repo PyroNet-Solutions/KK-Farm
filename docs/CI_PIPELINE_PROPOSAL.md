@@ -19,6 +19,7 @@
 │   ├── security.yml         # required — dependency review, secret scan, static analysis
 │   ├── perf-nightly.yml     # scheduled — k6 load + Lighthouse CI mobile + real-time latency probe
 │   ├── docs-lint.yml        # docs-only PRs — markdown lint + link check
+│   ├── deploy-staging.yml   # manual/tag — deploys to GitHub Environment "staging"; waits for Ammar's approval
 │   └── release-readiness.yml# manual — assembles QA report inputs for the QA Lead
 ├── ISSUE_TEMPLATE/          # exists
 ├── PULL_REQUEST_TEMPLATE.md # exists
@@ -60,6 +61,15 @@ Triggers: `pull_request` (all branches), `push` to `main`. Concurrency group per
 - Lighthouse CI on key pages with mobile throttling; asserts LCP/INP/CLS budgets.
 - Real-time latency probe: emit event → measure time to client receipt; asserts p95.
 - Results posted to a rolling issue the QA Lead tracks.
+
+## 6a. `deploy-staging.yml` (manual, approval-gated)
+
+- Trigger: `workflow_dispatch` (choose a commit/tag) or a `v*-rc*` tag — never on plain push.
+- Pre-condition job re-checks that `pr-validate`, `security` and `e2e` succeeded for that SHA.
+- Deploy job targets the GitHub **Environment `staging`** configured with **required reviewer = Ammar** and environment-scoped secrets (provider token, demo-account passwords). The run pauses until he approves.
+- Steps: build → run migrations on the staging DB → `seed:demo` (idempotent) → deploy web/worker/realtime → smoke test (`/healthz`, login page, one authenticated API call) → write commit SHA + URL to the job summary.
+- PR preview environments (where the host supports them) are created by the hosting provider's GitHub integration, not by this workflow, and are destroyed on merge/close.
+- There is **no `deploy-production.yml`** in this phase; production (farm VM) deployment is a separate, manual runbook with its own owner approval (D-002, STG-4).
 
 ## 7. Required checks & branch protection (owner to enable)
 

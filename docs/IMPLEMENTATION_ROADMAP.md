@@ -93,6 +93,10 @@ Scope:
 
 **Gate G5:** CEO reconciles one full month against existing records.
 
+## Gate G-STAGE — Live staging acceptance (mandatory before any farm-VM deployment)
+
+When the integrated MVP (Phases 1–5 as scoped by the owner) passes CI, it is deployed — after CI success **and** Ammar's explicit approval in GitHub — to the shared **staging environment** ([STAGING_ENVIRONMENT.md](STAGING_ENVIRONMENT.md)): full stack, synthetic demo data, role test accounts, simulated RFID reader. Ammar tests from desktop and mobile; the QA Lead reviews the acceptance package (URL, SHA, test results, manual QA checklist, limitations, cost, bug process). Only after G-STAGE is signed off does the production (farm VM) runbook begin, and never automatically.
+
 ## Phase 6 — Intelligence & scale
 
 - Layer‑3 (optional) learned/LLM assistance after data quality review.
