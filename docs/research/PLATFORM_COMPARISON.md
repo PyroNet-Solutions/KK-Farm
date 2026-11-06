@@ -91,6 +91,8 @@ A working shepherd's Android app built around **EID + visual tag dual identifica
 
 ## 4. Commercial platforms (benchmark, not reuse)
 
+> A verified, feature-by-feature benchmark of the owner's five-product shortlist (Throf, Farmbrite, UNIFORM-Agri Goat, PeakHerds, UBIQ) against every KK Farm requirement — including the gaps none of them address — is in [COMPETITOR_BENCHMARK.md](COMPETITOR_BENCHMARK.md).
+
 Prices are from directories and reviews as of 2026 and **conflict between sources**; treat as indicative only. None publishes an Urdu UI, PKR pricing or Pakistan data residency; none is open source; none offers code reuse. Their value to KK Farm is as a **feature and UX benchmark**.
 
 | Platform | Species focus | Goat-relevant features reported | Offline | EID/RFID reader | Pricing (indicative) | Reuse feasibility |

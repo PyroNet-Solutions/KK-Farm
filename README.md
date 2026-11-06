@@ -38,7 +38,7 @@ Read in this order if you are new:
 11a. [TEAM_WORKFLOW.md](docs/TEAM_WORKFLOW.md) · [TESTING_STRATEGY.md](docs/TESTING_STRATEGY.md) · [CI_PIPELINE_PROPOSAL.md](docs/CI_PIPELINE_PROPOSAL.md) — how the team works, tests and validates PRs
 11b. [TECHNOLOGY_EVALUATION.md](docs/TECHNOLOGY_EVALUATION.md) — two stacks compared with verified latest-stable versions; recommendation (proposed)
 11c. [PERFORMANCE_ACCEPTANCE_CRITERIA.md](docs/PERFORMANCE_ACCEPTANCE_CRITERIA.md) · [REALTIME_ARCHITECTURE.md](docs/REALTIME_ARCHITECTURE.md) · [MEDIA_AND_PHOTOS.md](docs/MEDIA_AND_PHOTOS.md) · [SHARED_VM_ARCHITECTURE.md](docs/SHARED_VM_ARCHITECTURE.md) — speed targets, live updates, goat photographs, shared-VM isolation
-12. [docs/research/](docs/research/) — competitor and workbook analysis, and the [platform & repository comparison](docs/research/PLATFORM_COMPARISON.md) (licensing and reuse feasibility)
+12. [docs/research/](docs/research/) — competitor and workbook analysis, the [platform & repository comparison](docs/research/PLATFORM_COMPARISON.md) (licensing and reuse feasibility) and the [five-product competitor benchmark](docs/research/COMPETITOR_BENCHMARK.md) (feature matrix and the gaps KK Farm must own)
 13. [docs/farm-visit/](docs/farm-visit/) — **On-Site Discovery Pack**: [field guide](docs/farm-visit/FARM_VISIT_FIELD_GUIDE.md) · [blank data-capture templates](docs/farm-visit/FARM_DATA_CAPTURE_TEMPLATES.md) · [RFID hardware inspection](docs/farm-visit/RFID_HARDWARE_INSPECTION.md) · [workflow interviews & observation](docs/farm-visit/FARM_WORKFLOW_DISCOVERY.md) · [prioritised open questions](docs/farm-visit/FARM_VISIT_OPEN_QUESTIONS.md)
 
 ## Ground rules for this phase

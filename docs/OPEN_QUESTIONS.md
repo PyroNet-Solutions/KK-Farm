@@ -140,7 +140,9 @@ The brief lists these as pending — **do not invent answers**: employee count &
 | Q-INF-3 | Off-site backup destination? | Independent restore (G-6). | CEO | P2+ | |
 | Q-INF-4 | Maintenance window and on-call owner? | Reliability targets. | CEO | P2+ | |
 | Q-NFR-5 | Is a GPL dependency acceptable anywhere, or permissive-only for anything shipped to devices? | Licence policy (see PLATFORM_COMPARISON). | CEO + engineering | P1 | |
-| Q-BC-2 | Trial a goat-specific SaaS for a month to study breeding/ADG UX? | Design input. | CEO | P2+ | |
+| Q-BC-2 | Trial a goat-specific SaaS to study UX — specifically Throf's free tier (≤ 25 head) and/or Farmbrite's 14-day trial? No payment details without approval. | Design input; see [research/COMPETITOR_BENCHMARK.md](research/COMPETITOR_BENCHMARK.md). | CEO | P2+ | |
+| Q-BC-4 | Has the CEO personally used any of the five benchmark products; which flows impressed or frustrated? | Direct UX input. | CEO | P2+ | |
+| Q-BC-5 | Must Urdu right-to-left layout be first-class from day one (as Throf does Arabic)? | i18n/RTL design effort. | CEO | P1 | |
 | Q-BC-3 | Future data exchange with a breed registry, PAITS or buyers? | ICAR ADE alignment priority. | CEO | P2+ | |
 
 ---

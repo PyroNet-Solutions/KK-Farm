@@ -21,6 +21,7 @@ The repository exists and the discovery documentation set is in place. Requireme
 - [x] Testing structure and CI pipeline proposed for the QA Lead to own — [TESTING_STRATEGY.md](TESTING_STRATEGY.md), [CI_PIPELINE_PROPOSAL.md](CI_PIPELINE_PROPOSAL.md) (D-018, Proposed)
 - [x] Technology evaluation with verified latest-stable versions and two compared stacks — [TECHNOLOGY_EVALUATION.md](TECHNOLOGY_EVALUATION.md) (D-023…D-030, Proposed)
 - [x] Performance acceptance criteria — [PERFORMANCE_ACCEPTANCE_CRITERIA.md](PERFORMANCE_ACCEPTANCE_CRITERIA.md) (D-022)
+- [x] Verified competitor benchmark of Throf, Farmbrite, UNIFORM Goat (site blocked — unverified), PeakHerds, UBIQ vs. all KK Farm requirements, with the ten gaps none address — [research/COMPETITOR_BENCHMARK.md](research/COMPETITOR_BENCHMARK.md)
 - [x] On-Site Discovery Pack for the farm visit — [farm-visit/](farm-visit/) (field guide, blank templates, RFID inspection checklist, role interviews, prioritised questions)
 - [x] Real-time, media/photos and shared-VM designs — [REALTIME_ARCHITECTURE.md](REALTIME_ARCHITECTURE.md), [MEDIA_AND_PHOTOS.md](MEDIA_AND_PHOTOS.md), [SHARED_VM_ARCHITECTURE.md](SHARED_VM_ARCHITECTURE.md)
 
