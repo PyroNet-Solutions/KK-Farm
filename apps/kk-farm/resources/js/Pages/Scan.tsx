@@ -1,0 +1,132 @@
+import { Head, Link, router, useForm } from '@inertiajs/react';
+import { Radio, ScanLine } from 'lucide-react';
+import { AnimatePresence, motion } from 'motion/react';
+import { useEffect, useState } from 'react';
+import GoatPortrait from '../components/GoatPortrait';
+import { Button, Chip, Field, HealthChip, Note, PageHeader, Panel, ReproChip } from '../components/ui';
+import type { GoatCard, Option } from '../types';
+
+type Result = { code: string; state: 'assigned' | 'free' | 'lost' | 'unknown'; goat: GoatCard | null; since: string | null; history: Array<{ id: string; number: string; to: string | null; reason: string | null }> };
+type Props = { result: Result | null; samples: { assigned: string[]; free: string[]; new: string[] }; untagged: Option[]; goats: Option[] };
+
+export default function Scan({ result, samples, goats }: Props) {
+    const [code, setCode] = useState(result?.code ?? '');
+    const [scanning, setScanning] = useState(false);
+    useEffect(() => setScanning(false), [result]);
+
+    const scan = (value: string) => {
+        const tag = value.trim();
+        if (!tag) {
+            return;
+        }
+        setCode(tag);
+        setScanning(true);
+        router.get('/scan', { tag }, { preserveState: true, preserveScroll: true, replace: true, onFinish: () => setScanning(false) });
+    };
+
+    const sample = (label: string, codes: string[]) => (
+        <div>
+            <div className="mb-1 text-sm text-ink-soft">{label}</div>
+            <div className="flex flex-wrap gap-1.5">
+                {codes.map((c) => <button key={c} type="button" onClick={() => scan(c)} className="min-h-9 rounded-[4px] border border-rule bg-tile px-2 text-sm hover:border-turq-600">{c}</button>)}
+                {!codes.length ? <span className="text-sm text-ink-faint">None available</span> : null}
+            </div>
+        </div>
+    );
+
+    return (
+        <>
+            <Head title="RFID Scan" />
+            <PageHeader title="RFID scan" description="Scan a tag to open the goat. This is a simulator: no real reader is connected." />
+            <div className="grid gap-4 lg:grid-cols-[24rem_minmax(0,1fr)]">
+                <div className="space-y-4">
+                    <Panel title="Simulated reader">
+                        <form onSubmit={(e) => { e.preventDefault(); scan(code); }} className="space-y-2">
+                            <Field label="Tag code"><input value={code} onChange={(e) => setCode(e.target.value)} placeholder="SIM-982-…" className="field" autoFocus /></Field>
+                            <Button type="submit" className="w-full" disabled={scanning}><ScanLine size={17} aria-hidden /> {scanning ? 'Reading' : 'Scan tag'}</Button>
+                        </form>
+                    </Panel>
+                    <Panel title="Try a demo tag">
+                        <div className="space-y-3">
+                            {sample('On a goat', samples.assigned)}
+                            {sample('Released by a goat that left', samples.free)}
+                            {sample('New, never used', samples.new)}
+                        </div>
+                    </Panel>
+                </div>
+
+                <AnimatePresence mode="wait">
+                    <motion.div key={result?.code ?? 'idle'} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}>
+                        {!result ? <Idle /> : null}
+                        {result?.state === 'assigned' && result.goat ? <Found goat={result.goat} result={result} /> : null}
+                        {result && result.state !== 'assigned' ? <Unassigned result={result} goats={goats} /> : null}
+                    </motion.div>
+                </AnimatePresence>
+            </div>
+        </>
+    );
+}
+
+function Idle() {
+    return (
+        <Panel className="h-full">
+            <div className="flex flex-col items-center gap-2 py-14 text-center">
+                <span className="grid size-14 place-items-center rounded-tile bg-cobalt-100 text-cobalt-700"><Radio size={26} aria-hidden /></span>
+                <p className="font-semibold text-cobalt-900">Waiting for a scan</p>
+                <p className="max-w-[40ch] text-sm text-ink-soft">The goat is found through its current tag assignment. The tag code is never the goat's identity.</p>
+            </div>
+        </Panel>
+    );
+}
+
+function Found({ goat, result }: { goat: GoatCard; result: Result }) {
+    const remove = useForm({ animal_id: goat.id, reason: 'lost' });
+    return (
+        <Panel title="Goat found" description={`Tag ${result.code}, on this goat since ${result.since}`}>
+            <div className="flex flex-col gap-4 sm:flex-row">
+                {goat.photo ? <img src={`/media/${goat.photo}`} alt="" className="size-32 rounded-tile object-cover" /> : <GoatPortrait number={goat.number} coat={goat.coat} sex={goat.sex} size={128} />}
+                <div className="min-w-0">
+                    <h2 className="text-xl font-bold text-cobalt-900">{goat.name ?? 'Unnamed goat'}</h2>
+                    <p className="text-ink-soft">{goat.number} · {goat.breed} · {goat.age}</p>
+                    <p className="text-ink-soft">{goat.pen}{goat.weight ? ` · ${goat.weight} kg` : ''}</p>
+                    <div className="mt-1 flex gap-1"><HealthChip health={goat.health} /><ReproChip repro={goat.repro} /></div>
+                    <div className="mt-3 flex flex-wrap gap-2">
+                        <Link href={`/goats/${goat.id}`}><Button>Open full record</Button></Link>
+                        <Button variant="secondary" disabled={remove.processing} onClick={() => remove.post('/scan/remove', { preserveScroll: true })}>Tag lost: release it</Button>
+                    </div>
+                </div>
+            </div>
+        </Panel>
+    );
+}
+
+function Unassigned({ result, goats }: { result: Result; goats: Option[] }) {
+    const form = useForm({ tag: result.code, animal_id: String(goats[0]?.id ?? ''), reason: result.history.length ? 'reassigned' : 'initial' });
+
+    if (result.state === 'unknown') {
+        return <Panel title="Tag not recognised"><Note>{result.code} is not in the tag register. Check the code and scan again.</Note></Panel>;
+    }
+    if (result.state === 'lost') {
+        return <Panel title="Tag marked lost"><Note>{result.code} was reported lost. It cannot be assigned until it is reviewed.</Note></Panel>;
+    }
+    return (
+        <Panel title="Tag is free" description={result.code}>
+            {result.history.length ? (
+                <div className="mb-3">
+                    <p className="mb-1 text-sm text-ink-soft">This tag was used before. Those records stay with that goat and do not move.</p>
+                    <ul className="text-sm">
+                        {result.history.map((h) => <li key={h.id + h.to}><Link href={`/goats/${h.id}`} className="font-semibold text-cobalt-800 hover:underline">{h.number}</Link> until {h.to} <Chip className="bg-cobalt-100 text-cobalt-800">{h.reason}</Chip></li>)}
+                    </ul>
+                </div>
+            ) : null}
+            <form onSubmit={(e) => { e.preventDefault(); form.post('/scan/assign', { preserveScroll: true }); }} className="grid gap-2 sm:grid-cols-[1fr_auto] sm:items-end">
+                <Field label="Assign to goat" error={form.errors.tag ?? form.errors.animal_id} hint="A goat with a tag has that tag closed as replaced">
+                    <select className="field" value={form.data.animal_id} onChange={(e) => form.setData('animal_id', e.target.value)}>
+                        {goats.map((g) => <option key={g.id} value={g.id}>{g.farm_number}{g.name ? ` · ${g.name}` : ''}</option>)}
+                    </select>
+                </Field>
+                <Button type="submit" disabled={form.processing}>Assign tag</Button>
+            </form>
+        </Panel>
+    );
+}

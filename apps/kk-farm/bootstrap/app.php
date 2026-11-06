@@ -1,0 +1,33 @@
+<?php
+
+use App\Http\Middleware\EnsureModule;
+use App\Http\Middleware\HandleInertiaRequests;
+use Illuminate\Foundation\Application;
+use Illuminate\Foundation\Configuration\Exceptions;
+use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Http\Request;
+use Inertia\Inertia;
+
+return Application::configure(basePath: dirname(__DIR__))
+    ->withRouting(
+        web: __DIR__.'/../routes/web.php',
+        commands: __DIR__.'/../routes/console.php',
+        health: '/up',
+    )
+    ->withMiddleware(function (Middleware $middleware): void {
+        $middleware->web(append: [HandleInertiaRequests::class]);
+        $middleware->alias(['module' => EnsureModule::class]);
+    })
+    ->withExceptions(function (Exceptions $exceptions): void {
+        $exceptions->shouldRenderJsonWhen(
+            fn (Request $request) => $request->is('api/*') || $request->expectsJson(),
+        );
+        $exceptions->respond(function ($response, $e, Request $request) {
+            if (in_array($response->getStatusCode(), [403, 404], true) && ! $request->expectsJson()) {
+                return Inertia::render('Error', ['status' => $response->getStatusCode()])
+                    ->toResponse($request)->setStatusCode($response->getStatusCode());
+            }
+
+            return $response;
+        });
+    })->create();
