@@ -17,8 +17,13 @@
 | Repository, documentation set, templates | ✅ this PR |
 | Excel workbook analysis | ⏳ pending file |
 | Farm visit: answers to OPEN_QUESTIONS, RFID inspection, register photos | ⏳ |
-| Stack & hosting decision recorded | ⏳ |
-| **Gate G0:** CEO approves requirements + architecture; authorises Phase 1 | ⏳ |
+| Stack & hosting decision recorded | ⏳ — recommendation ready in [TECHNOLOGY_EVALUATION.md](TECHNOLOGY_EVALUATION.md) (D-023…D-030 Proposed) |
+| Premium / real-time / performance / photo requirements folded into docs | ✅ 2026-11-07 (REQUIREMENTS §11, PERFORMANCE_ACCEPTANCE_CRITERIA, REALTIME_ARCHITECTURE, MEDIA_AND_PHOTOS, SHARED_VM_ARCHITECTURE) |
+| Team workflow, testing structure, CI proposal | ✅ 2026-11-07 (TEAM_WORKFLOW, TESTING_STRATEGY, CI_PIPELINE_PROPOSAL) |
+| **Gate G0:** CEO approves requirements + architecture + stack; authorises Phase 1 | ⏳ |
+
+### Phase 1 technical spike (first two weeks after G0, before feature work)
+Prove the risky pieces with throw-away code and record results: Octane + Valkey + Reverb end-to-end latency; outbox → broker → client under load; imgproxy + Garage signed-URL flow from a phone camera; PWA offline queue + Background Sync on a farm phone; the RFID scan source on the real reader; Lighthouse/k6 baseline against the acceptance criteria. Any failure feeds back into D-023…D-030 before implementation starts.
 
 ## Phase 1 — Identity, RFID & animal registry (MVP core)
 
@@ -27,7 +32,10 @@
 Scope:
 - Users, roles, login, PIN re-auth on shared device.
 - Breeds, sheds/pens, animals, RFID tags & assignments, location transfers.
-- Animal profile screen + lifecycle timeline.
+- Animal profile screen + lifecycle timeline, **with profile photo, gallery, camera capture and photo history** (PH-1…PH-9).
+- **Real-time foundation**: outbox, broker, WebSocket service, channel authorisation; live profile, shed view and ops activity feed (RT-1…RT-4).
+- **Design system** (tokens, components, motion rules, reduced-motion) established here and reused by every later module.
+- **Performance gates** from PERFORMANCE_ACCEPTANCE_CRITERIA enforced in CI from this phase (bundle budget, Lighthouse CI, k6 baseline).
 - Scan integration with the actual reader (chosen mode from RFID research) + manual/QR fallback.
 - Initial data import from registers/Excel (identity fields only) with a validation report.
 - Audit log infrastructure.

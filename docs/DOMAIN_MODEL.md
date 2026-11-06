@@ -62,7 +62,8 @@ erDiagram
 | **Breed** | A breed definition. | `name`, `description`, `default_gestation_days` (`[ASSUMED]`) | Dynamically managed. Cross-breeds: `[UNKNOWN]` → Q-PB-4. |
 | **RFID Tag** | The physical tag. | `epc` / `tag_code`, `tag_type` (LF/UHF), `printed_number`, `status` (in stock / assigned / lost / destroyed) | Can be reused. `epc` is unique per tag but is **not** the animal key. |
 | **RFID Assignment** | Period during which a tag identified an animal. | `animal_id`, `tag_id`, `assigned_at`, `assigned_by`, `unassigned_at`, `unassigned_by`, `reason` | Exactly one *open* assignment per tag, and at most one per animal, at any moment. |
-| **Animal Photo** | Image of the animal. | `animal_id`, `taken_at`, `file` | `[ASSUMED]` |
+| **Animal Photo** | A photograph attached to the animal's permanent identity (never to the tag). | `animal_id`, `file_id` (→ Media File with variants), `taken_at`, `notes`, `context_tags[]`, `is_profile`, `hidden_at` | `[CONFIRMED]` PH-1…PH-9 — see [MEDIA_AND_PHOTOS.md](MEDIA_AND_PHOTOS.md). One profile photo per animal; soft-hide only. |
+| **Media File** | The stored original image plus generated variants (avatar/card/profile/full in WebP/AVIF/JPEG), kept in object storage, referenced by key. | `storage_key`, `mime`, `bytes`, `sha256`, `captured_at`, `status`, `access_domain` | Binaries never in the relational DB (PH-8). |
 
 ### 3.2 Location
 
@@ -194,6 +195,8 @@ heat observed ──► mated ──► pregnancy check ──► pregnant ─�
 | I-7 | An animal cannot be its own ancestor (pedigree is a DAG). |
 | I-8 | Kids registered from a kidding event inherit `dam_id` from the event; `sire_id` comes from the linked mating event or is explicitly marked unknown. |
 | I-9 | Every write records *who* and *when*. |
+| I-10 | Photos belong to `Animal.id`; reassigning an RFID tag never moves, hides or exposes photos. |
+| I-11 | Every state change that must be visible live is emitted as a domain event in the same transaction (outbox); no event without a committed write, no committed write without its event. |
 
 ## 6. What the workbook and farm visit must still tell us
 

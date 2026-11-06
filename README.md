@@ -14,7 +14,8 @@ KK Farm is a professional goat breeding operation. This repository is the single
 | Excel workbook (`KK_Farms_360_Goat_Management_System.xlsx`) | **Not yet received** — analysis pending |
 | Competitor review (goatmart.pk) | Site offline at time of review — see [research note](docs/research/COMPETITOR_GOATMART.md) |
 | RFID hardware | Make/model unknown — see [RFID research](docs/RFID_INTEGRATION_RESEARCH.md) |
-| Technology stack | **Not decided** — proposal only |
+| Technology stack | **Not decided** — recommendation with verified versions in [TECHNOLOGY_EVALUATION.md](docs/TECHNOLOGY_EVALUATION.md), awaiting Ammar's approval |
+| Product direction | **Premium, real-time livestock intelligence platform** — every goat with its own digital identity, photographs, medical/breeding history and complete lifecycle record (owner, 2026-11-07) |
 | Application code | None. Development does not start until farm-visit findings are reviewed and approved. |
 
 See [PROJECT_STATUS.md](docs/PROJECT_STATUS.md) for the live status and [OPEN_QUESTIONS.md](docs/OPEN_QUESTIONS.md) for everything that still needs an answer.
@@ -35,6 +36,8 @@ Read in this order if you are new:
 10. [IMPLEMENTATION_ROADMAP.md](docs/IMPLEMENTATION_ROADMAP.md) — recommended phases
 11. [DECISIONS_LOG.md](docs/DECISIONS_LOG.md) — decisions taken, with reasons
 11a. [TEAM_WORKFLOW.md](docs/TEAM_WORKFLOW.md) · [TESTING_STRATEGY.md](docs/TESTING_STRATEGY.md) · [CI_PIPELINE_PROPOSAL.md](docs/CI_PIPELINE_PROPOSAL.md) — how the team works, tests and validates PRs
+11b. [TECHNOLOGY_EVALUATION.md](docs/TECHNOLOGY_EVALUATION.md) — two stacks compared with verified latest-stable versions; recommendation (proposed)
+11c. [PERFORMANCE_ACCEPTANCE_CRITERIA.md](docs/PERFORMANCE_ACCEPTANCE_CRITERIA.md) · [REALTIME_ARCHITECTURE.md](docs/REALTIME_ARCHITECTURE.md) · [MEDIA_AND_PHOTOS.md](docs/MEDIA_AND_PHOTOS.md) · [SHARED_VM_ARCHITECTURE.md](docs/SHARED_VM_ARCHITECTURE.md) — speed targets, live updates, goat photographs, shared-VM isolation
 12. [docs/research/](docs/research/) — competitor and workbook analysis, and the [platform & repository comparison](docs/research/PLATFORM_COMPARISON.md) (licensing and reuse feasibility)
 
 ## Ground rules for this phase

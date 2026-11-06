@@ -177,6 +177,76 @@ Requirement IDs are stable: `AM` = Animal Management, `PB` = Pedigree & Breeding
 | NFR-8 | Role-based access enforced on the server, not just hidden in the UI. | `[CONFIRMED]` (FN-12) |
 | NFR-9 | Preferred technology stack and deployment environment. | `[UNKNOWN]` → Q-NFR-3 |
 
+## 11. Premium platform direction (owner, 2026-11-07)
+
+The owner confirmed on 2026-11-07 that KK Farm must be a **premium, real-time livestock intelligence platform**, not a basic CRUD application, built on modern, latest-stable, actively maintained technology. Priorities in order: reliability & data integrity → exceptional speed → real-time operational visibility → excellent mobile experience → premium visual design → strong security & access control → easy maintenance & scalability.
+
+### 11.1 Technology selection (TS)
+
+| ID | Requirement | Status |
+|----|-------------|--------|
+| TS-1 | Research latest **stable** versions of frontend, backend, database, UI, animation and real-time technologies; verify from official docs/release notes. | `[CONFIRMED]` |
+| TS-2 | Prefer actively maintained, production-ready technology; no deprecated, abandoned, RC or experimental choices. | `[CONFIRMED]` |
+| TS-3 | Compare at least two viable stacks; document why the recommended one is best for KK Farm (maintainability, ecosystem, performance, security, team ability). | `[CONFIRMED]` → [TECHNOLOGY_EVALUATION.md](TECHNOLOGY_EVALUATION.md) |
+
+### 11.2 Performance (PF) — targets in [PERFORMANCE_ACCEPTANCE_CRITERIA.md](PERFORMANCE_ACCEPTANCE_CRITERIA.md)
+
+| ID | Requirement | Status |
+|----|-------------|--------|
+| PF-1 | Fast initial load and navigation; no unnecessary full-page reloads. | `[CONFIRMED]` |
+| PF-2 | Fast DB queries and API responses: optimised queries, indexes, caching, background jobs. | `[CONFIRMED]` |
+| PF-3 | Lazy loading, pagination and virtualisation for large lists. | `[CONFIRMED]` |
+| PF-4 | Optimised frontend bundles and code splitting. | `[CONFIRMED]` |
+| PF-5 | Smooth on ordinary Android phones used by farm employees. | `[CONFIRMED]` |
+| PF-6 | Performance testing under realistic concurrent usage; measurable targets with documented test method. | `[CONFIRMED]` |
+
+### 11.3 Real-time (RT) — design in [REALTIME_ARCHITECTURE.md](REALTIME_ARCHITECTURE.md)
+
+| ID | Requirement | Status |
+|----|-------------|--------|
+| RT-1 | Real-time updates are a **core** requirement: health records, scan→profile, shed moves, births, breeding, treatments, feeding confirmations, alerts, dashboard figures and activity feeds update without refresh. | `[CONFIRMED]` |
+| RT-2 | Evaluate WebSockets, SSE and event-driven architecture; select on actual requirements. | `[CONFIRMED]` |
+| RT-3 | Reliable delivery, authenticated channels, reconnection handling, permission checks; never broadcast private animal or financial data to unauthorised users. | `[CONFIRMED]` |
+| RT-4 | Sub-second visible updates on healthy networks; actual performance measured. | `[CONFIRMED]` |
+
+### 11.4 Premium UI/UX (UX)
+
+| ID | Requirement | Status |
+|----|-------------|--------|
+| UX-1 | Polished, modern, enterprise-grade interface with a consistent design system across every module. | `[CONFIRMED]` |
+| UX-2 | Dashboards with live statistics and charts. | `[CONFIRMED]` |
+| UX-3 | Smooth page transitions, meaningful micro-interactions, animated status changes and notification indicators. | `[CONFIRMED]` |
+| UX-4 | Responsive mobile navigation; professional tables, filters, search and animal cards. | `[CONFIRMED]` |
+| UX-5 | Interactive breeding/pedigree family trees; attractive veterinary and growth-history visualisations. | `[CONFIRMED]` |
+| UX-6 | Animations smooth on mid-range Android; no decorative-only animation; respect `prefers-reduced-motion`. | `[CONFIRMED]` |
+| UX-7 | Still usable by low-literacy staff (BC-5): premium ≠ complex; scan-first, icon-led flows remain. | `[CONFIRMED]` (BC-5) |
+
+### 11.5 Photographs (PH) — design in [MEDIA_AND_PHOTOS.md](MEDIA_AND_PHOTOS.md)
+
+| ID | Requirement | Status |
+|----|-------------|--------|
+| PH-1…PH-9 | Main profile picture; gallery; upload from phone; camera capture; history with date and notes; visible in search/dashboards/profile; optimised thumbnails and responsive images (WebP/AVIF); originals stored safely outside the relational DB; photos bound to the permanent animal identity across tag reassignment. | `[CONFIRMED]` |
+| PH-10, PH-11 | Soft-hide only; photo context tags. | `[ASSUMED]` → Q-PH-1, Q-PH-2 |
+
+*(AM-14 "photos can be attached" is superseded by PH-1…PH-9.)*
+
+### 11.6 Infrastructure (INF) — design in [SHARED_VM_ARCHITECTURE.md](SHARED_VM_ARCHITECTURE.md)
+
+| ID | Requirement | Status |
+|----|-------------|--------|
+| INF-1 | The public website and the livestock platform will eventually run on **the same VM**. | `[CONFIRMED]` (owner infrastructure decision) |
+| INF-2 | Separate applications, deployment processes, databases and credentials; reverse-proxy routing; isolated resource limits; dedicated worker and real-time services; independent backups/restores; monitoring and logging; secure media storage and backup. | `[CONFIRMED]` |
+| INF-3 | The livestock application or its database can move to another VM later without redesign; sharing a VM must not couple the two applications. | `[CONFIRMED]` |
+| INF-4 | VM provider, specification, domains and backup destination. | `[UNKNOWN]` → Q-INF-1…4 |
+
+### 11.7 Engineering process (EP) — [TEAM_WORKFLOW.md](TEAM_WORKFLOW.md), [TESTING_STRATEGY.md](TESTING_STRATEGY.md), [CI_PIPELINE_PROPOSAL.md](CI_PIPELINE_PROPOSAL.md)
+
+| ID | Requirement | Status |
+|----|-------------|--------|
+| EP-1 | Mandatory test structure per module (unit, API/integration, DB/migration, auth/RBAC, E2E, mobile responsiveness, simulated RFID, real-time delivery/reconnection, image pipeline, performance/load, security/regression). | `[CONFIRMED]` |
+| EP-2 | GitHub Actions validate every PR; critical checks must pass; failing tests are never skipped or weakened. | `[CONFIRMED]` |
+| EP-3 | Synthetic data only in tests and workflows; no secrets in logs. | `[CONFIRMED]` |
+
 ## Explicitly out of scope (for now)
 
 - Public marketplace / selling goats online (goatmart-style features) — unless the CEO asks.

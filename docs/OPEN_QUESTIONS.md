@@ -122,6 +122,27 @@ The brief lists these as pending — **do not invent answers**: employee count &
 | Q-NFR-3 | Preferred technology stack and hosting (cloud, on-prem, existing PyroNet infra later)? | Stack decision. | CEO + engineering | P1 | |
 | Q-NFR-4 | Backup/retention expectations; any regulatory record-keeping requirement? | Data policy. | CEO | P2+ | |
 
+## L. Premium / real-time / photos / infrastructure (added 2026-11-07)
+
+| ID | Question | Why it matters | Ask | Blocks | Answer |
+|----|----------|----------------|-----|--------|--------|
+| Q-PF-1 | Which phone models do staff actually use (make, Android version, RAM)? | Replaces the reference device for performance targets. | Farm visit | P1 | |
+| Q-PF-2 | Expected peak concurrent users in 3 years? | Sets the load-test profile. | CEO | P2+ | |
+| Q-PF-3 | Acceptable maintenance window? | Deploy and backup scheduling. | CEO | P2+ | |
+| Q-RT-1 | Which screens must be live in Phase 1 (minimum: profile, shed view, ops activity, vet alerts, dashboard)? | Scope of real-time channels. | CEO | P1 | |
+| Q-RT-2 | Do critical alerts also need push/SMS/WhatsApp when the app is closed? | Separate delivery channel. | CEO | P2+ | |
+| Q-PH-1 | Soft-hide only, or allow true deletion of accidental uploads within 24 h? | Retention rule. | CEO | P1 | |
+| Q-PH-2 | Which photo context tags matter (side profile, udder, hoof, injury, sale)? | Gallery usefulness for vets/sales. | Vets, CEO | P2+ | |
+| Q-PH-3 | Keep full-resolution originals or the ≤ 2048 px client-resized master? | Storage and upload time. | CEO | P1 | |
+| Q-PH-4 | Should photos be shareable externally (buyer link)? | Signed-URL policy. | CEO | P2+ | |
+| Q-INF-1 | VM specification, provider, region, administrator? | Sizing and ops. | CEO | P2+ | |
+| Q-INF-2 | Domain names for website / app / real-time / media? | Proxy routing, TLS. | CEO | P2+ | |
+| Q-INF-3 | Off-site backup destination? | Independent restore (G-6). | CEO | P2+ | |
+| Q-INF-4 | Maintenance window and on-call owner? | Reliability targets. | CEO | P2+ | |
+| Q-NFR-5 | Is a GPL dependency acceptable anywhere, or permissive-only for anything shipped to devices? | Licence policy (see PLATFORM_COMPARISON). | CEO + engineering | P1 | |
+| Q-BC-2 | Trial a goat-specific SaaS for a month to study breeding/ADG UX? | Design input. | CEO | P2+ | |
+| Q-BC-3 | Future data exchange with a breed registry, PAITS or buyers? | ICAR ADE alignment priority. | CEO | P2+ | |
+
 ---
 
 ## How to use during the farm visit
