@@ -150,6 +150,7 @@ The brief lists these as pending — **do not invent answers**: employee count &
 | Q-STG-4 | Who gets staging accounts besides the CEO (vets, QA Lead)? | Account provisioning. | CEO | P2+ | |
 | Q-STG-5 | Gate staging behind basic-auth / IP allow-list, or open login with rate limiting? | Exposure of a demo system. | CEO | P2+ | |
 | Q-STG-6 | GitHub Pages for static docs/prototypes: does the organisation's existing plan already include Pages for private repos (no new cost), or would the repo need to be public? Neither change is made without the CEO's decision. | Free static preview only; never the app. | CEO | P2+ | |
+| Q-STG-7 | What GitHub Actions allowance does the organisation's plan give for private repositories, and are Codespaces billed to the organisation? | CI must stay at $0; neither is enabled until confirmed. | CEO | P1 | |
 
 ---
 

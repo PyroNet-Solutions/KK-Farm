@@ -105,11 +105,30 @@ Evaluated for the approved-pending architecture (Laravel 13 + PostgreSQL 18 + Va
 | Cost control | Hobby plan; spending limit; monthly invoice reported in the acceptance package; upgrade to Pro only with approval |
 | Exit criteria for the choice | If the Phase 1 spike shows Reverb or the scheduler pattern unworkable on Railway, fall back to Laravel Cloud (Option 2) via a new decision row |
 
-## 6b. Genuinely free hosting options ($0, no payment method) — research in progress
+## 6b. Genuinely free hosting options ($0, no payment method) — research result, 2026-11-07
 
 Criteria (owner, 2026-11-07): $0 cost; **no credit card or payment method at signup**; no paid trials; no account that can auto-charge; no domain purchase. The research must state, per option: what runs free (web, worker, scheduler, WebSockets, PostgreSQL, Redis, object storage), sleeping/idle behaviour, database expiry or pause rules, resource limits, regions, and whether the **complete** application can run reliably. Options that are free only with a card on file are listed separately as **excluded**.
 
-*Findings will be inserted here when the research completes; the decision row is D-033.*
+**Verdict: no.** On the providers checked on 2026-11-07, the complete stack (always-on worker, scheduler, Reverb WebSockets, PostgreSQL, Redis-compatible cache, object storage) cannot run *reliably* at $0 with no card. **Staging stays deferred** (D-033, D-035). No account was created while researching.
+
+| Component | Free, no-card status | Limitation |
+|-----------|----------------------|------------|
+| Web (PHP via Docker) | [Render Free](https://render.com/docs/free), Singapore: 0.1 CPU, 512 MB, 750 instance-hours/month | Sleeps after 15 min idle, about 1 min cold start, no persistent disk |
+| Background worker and scheduler | **Not available** as a free always-on service from a no-card provider | Only workable inside the web container, and only while it is awake |
+| Reverb WebSockets | Possible inside the same Render container | Connections drop on sleep or cold start; no separate service |
+| PostgreSQL | [Neon Free](https://neon.com/pricing), PG 14–18, Singapore: 1 GB, 100 CU-hours/month, no card | Scales to zero after 5 min, usually a sub-second wake. [Render Free Postgres](https://render.com/docs/free) is deleted after 30 days (+14 grace); [Supabase](https://supabase.com/kb/faqs/platform/free-project-pausing) pauses after 1 week idle |
+| Redis-compatible | [Upstash](https://upstash.com/docs/redis/overall/pricing): 250 MB, 500K commands/month; [Aiven](https://aiven.io/docs/platform/concepts/free-plan) Valkey | A polling queue alone would use about 860K commands/month on Upstash; Aiven powers off when idle |
+| Object storage | [Tigris](https://www.tigrisdata.com/pricing) 5 GB, [Backblaze B2](https://www.backblaze.com/cloud-storage/pricing) 10 GB; S3 API | Tigris's overage behaviour is not stated, so check before any use |
+
+**Nearest honest compromise (not recommended yet, not approved):** Render Free (one container running web, worker, scheduler and Reverb) + Neon + Tigris or B2, with database queue and cache, and external keep-alive pings. Expect about 60 s cold starts, a single 512 MB container for everything, and background jobs that stop while it sleeps. That is a limited demo, not a staging environment that meets §2. Free tiers change, so re-verify before any proposal.
+
+**Excluded by the no-card rule:** Oracle Always Free, Google Cloud, AWS, Azure, Koyeb, Fly.io after trial, probably Cloudflare R2. Northflank's official pages contradict each other on whether a card is needed, so treat it as excluded. Railway's Free plan is $1/month of credit, which covers only a few days of one container. Vercel, Netlify and Cloudflare Workers have no native PHP runtime.
+
+**Charge risks inside GitHub itself (check before use):**
+- **Codespaces:** codespaces on organisation repositories bill the organisation or are blocked, so do not use them on KK-Farm until this is checked.
+- **Actions:** minutes on private repositories are metered. The organisation's plan could not be read, so confirm the allowance before enabling the workflows in CI_PIPELINE_PROPOSAL (Q-STG-7).
+
+Sources: provider pages linked above and [Render regions](https://render.com/docs/regions), [Neon regions](https://neon.com/docs/introduction/regions), [Railway plans](https://docs.railway.com/reference/pricing/plans), [Fly.io pricing](https://docs.fly.io/about/pricing), [Koyeb FAQ](https://www.koyeb.com/docs/faqs/pricing), [Northflank pricing](https://northflank.com/pricing), [Northflank billing](https://northflank.com/docs/v1/application/billing/pricing-on-northflank), [Oracle Free Tier](https://docs.oracle.com/en-us/iaas/Content/FreeTier/freetier.htm), [Codespaces billing](https://docs.github.com/en/billing/concepts/product-billing/github-codespaces).
 
 ## 7. Acceptance package (delivered before declaring staging ready)
 
