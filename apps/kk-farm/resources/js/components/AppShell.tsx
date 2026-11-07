@@ -1,0 +1,226 @@
+import { Link, router, usePage } from '@inertiajs/react';
+import {
+    BarChart3, Beef, CalendarCheck, ChevronDown, ClipboardList, HeartPulse, LayoutGrid, LogOut, Menu, Network, Radio, Scale, Search, Settings, Users, Wallet, Warehouse, Wheat, X,
+} from 'lucide-react';
+import { AnimatePresence, motion } from 'motion/react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { cx } from './ui';
+import type { SharedProps } from '../types';
+
+const NAV: Array<{ heading: string; items: Array<{ href: string; label: string; module: string; icon: typeof Beef }> }> = [
+    {
+        heading: 'Herd',
+        items: [
+            { href: '/', label: 'Dashboard', module: 'dashboard', icon: LayoutGrid },
+            { href: '/goats', label: 'Goat Registry', module: 'goats', icon: ClipboardList },
+            { href: '/scan', label: 'RFID Scan', module: 'scan', icon: Radio },
+        ],
+    },
+    {
+        heading: 'Care',
+        items: [
+            { href: '/breeding', label: 'Breeding & Pedigree', module: 'breeding', icon: Network },
+            { href: '/health', label: 'Veterinary & Health', module: 'health', icon: HeartPulse },
+            { href: '/weights', label: 'Weight & Growth', module: 'weights', icon: Scale },
+            { href: '/feeding', label: 'Feeding & Nutrition', module: 'feeding', icon: Wheat },
+        ],
+    },
+    {
+        heading: 'Farm',
+        items: [
+            { href: '/sheds', label: 'Sheds', module: 'sheds', icon: Warehouse },
+            { href: '/tasks', label: 'Tasks & Daily Work', module: 'tasks', icon: CalendarCheck },
+            { href: '/employees', label: 'Employees', module: 'employees', icon: Users },
+        ],
+    },
+    {
+        heading: 'Business',
+        items: [
+            { href: '/finance', label: 'Expenses & Finance', module: 'finance', icon: Wallet },
+            { href: '/reports', label: 'Reports', module: 'reports', icon: BarChart3 },
+            { href: '/settings', label: 'Settings', module: 'settings', icon: Settings },
+        ],
+    },
+];
+
+function Brand() {
+    return (
+        <Link href="/" className="flex items-center gap-2.5 px-2 text-white">
+            <svg viewBox="0 0 32 32" width="30" height="30" aria-hidden>
+                <rect width="32" height="32" rx="6" fill="#33c3bd" />
+                <path d="M16 5l3.2 7.8L27 16l-7.8 3.2L16 27l-3.2-7.8L5 16l7.8-3.2z" fill="#14306f" />
+                <circle cx="16" cy="16" r="3" fill="#fff" />
+            </svg>
+            <span className="leading-tight">
+                <span className="block text-base font-bold tracking-tight">KK Farm</span>
+                <span className="block text-xs text-cobalt-200">Livestock platform</span>
+            </span>
+        </Link>
+    );
+}
+
+function NavList({ path, modules, onNavigate }: { path: string; modules: string[]; onNavigate?: () => void }) {
+    return (
+        <nav aria-label="Main" className="mt-5 flex-1 space-y-5 overflow-y-auto px-2 pb-4">
+            {NAV.map((group) => {
+                const items = group.items.filter((item) => modules.includes(item.module));
+                if (!items.length) {
+                    return null;
+                }
+                return (
+                    <div key={group.heading}>
+                        <div className="px-2.5 pb-1 text-xs font-semibold text-cobalt-200">{group.heading}</div>
+                        <ul className="space-y-0.5">
+                            {items.map((item) => {
+                                const active = item.href === '/' ? path === '/' : path.startsWith(item.href);
+                                return (
+                                    <li key={item.href}>
+                                        <Link
+                                            href={item.href}
+                                            prefetch
+                                            onClick={onNavigate}
+                                            aria-current={active ? 'page' : undefined}
+                                            className={cx(
+                                                'flex min-h-10 items-center gap-2.5 rounded-tile px-2.5 py-1.5 text-sm font-medium transition-colors duration-150',
+                                                active ? 'bg-tile text-cobalt-900 shadow-tile' : 'text-cobalt-100 hover:bg-cobalt-800',
+                                            )}
+                                        >
+                                            <item.icon size={17} aria-hidden className={active ? 'text-turq-700' : 'text-turq-400'} />
+                                            {item.label}
+                                        </Link>
+                                    </li>
+                                );
+                            })}
+                        </ul>
+                    </div>
+                );
+            })}
+        </nav>
+    );
+}
+
+function RoleSwitcher({ auth, roles }: { auth: NonNullable<SharedProps['auth']>; roles: SharedProps['roles'] }) {
+    const [open, setOpen] = useState(false);
+    const root = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const close = (event: MouseEvent) => {
+            if (!root.current?.contains(event.target as Node)) {
+                setOpen(false);
+            }
+        };
+        document.addEventListener('mousedown', close);
+        return () => document.removeEventListener('mousedown', close);
+    }, []);
+
+    return (
+        <div className="relative" ref={root}>
+            <button type="button" aria-expanded={open} onClick={() => setOpen(!open)} className="flex min-h-11 items-center gap-2 rounded-tile border border-rule-strong bg-tile px-2.5 text-left hover:bg-cobalt-100">
+                <span className="grid size-7 place-items-center rounded-[4px] bg-cobalt-800 text-xs font-bold text-white">{auth.roleLabel.slice(0, 2).toUpperCase()}</span>
+                <span className="hidden leading-tight sm:block">
+                    <span className="block text-sm font-semibold">{auth.roleLabel}</span>
+                    <span className="block text-xs text-ink-soft">Simulated role</span>
+                </span>
+                <ChevronDown size={15} className="text-ink-soft" aria-hidden />
+            </button>
+            {open ? (
+                <div className="absolute right-0 z-40 mt-1.5 w-60 rounded-tile border border-rule bg-tile p-1 shadow-float">
+                    <div className="px-2.5 py-1.5 text-sm text-ink-soft">View the app as</div>
+                    {Object.entries(roles).map(([role, label]) => (
+                        <button
+                            key={role}
+                            type="button"
+                            onClick={() => router.post('/switch-role', { role })}
+                            className={cx('flex min-h-10 w-full items-center rounded-[4px] px-2.5 text-left text-sm hover:bg-cobalt-100', role === auth.role && 'bg-cobalt-100 font-semibold text-cobalt-900')}
+                        >
+                            {label}
+                        </button>
+                    ))}
+                    <div className="my-1 border-t border-rule" />
+                    <button type="button" onClick={() => router.post('/logout')} className="flex min-h-10 w-full items-center gap-2 rounded-[4px] px-2.5 text-left text-sm text-crit-700 hover:bg-crit-100">
+                        <LogOut size={15} aria-hidden /> Sign out
+                    </button>
+                </div>
+            ) : null}
+        </div>
+    );
+}
+
+export default function AppShell({ children }: { children: ReactNode }) {
+    const page = usePage<SharedProps>();
+    const { auth, roles, flash } = page.props;
+    const [drawer, setDrawer] = useState(false);
+    const [search, setSearch] = useState('');
+    const [toast, setToast] = useState<string | null>(null);
+    const path = page.url.split('?')[0];
+
+    useEffect(() => {
+        if (!flash) {
+            return;
+        }
+        setToast(flash);
+        const timer = setTimeout(() => setToast(null), 4500);
+        return () => clearTimeout(timer);
+    }, [flash, page.url]);
+
+    if (!auth) {
+        return <>{children}</>;
+    }
+
+    const submitSearch = (event: React.FormEvent) => {
+        event.preventDefault();
+        router.get('/goats', search ? { q: search } : {});
+    };
+
+    return (
+        <div className="min-h-dvh bg-glaze lg:pl-60">
+            <aside className="fixed inset-y-0 left-0 z-30 hidden w-60 flex-col bg-cobalt-900 pt-4 lg:flex">
+                <Brand />
+                <NavList path={path} modules={auth.modules} />
+            </aside>
+
+            <AnimatePresence>
+                {drawer ? (
+                    <motion.div className="fixed inset-0 z-50 lg:hidden" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.15 }}>
+                        <button type="button" aria-label="Close menu" className="absolute inset-0 bg-cobalt-950/60" onClick={() => setDrawer(false)} />
+                        <motion.aside initial={{ x: -280 }} animate={{ x: 0 }} exit={{ x: -280 }} transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }} className="absolute inset-y-0 left-0 flex w-68 max-w-[85vw] flex-col bg-cobalt-900 pt-4">
+                            <div className="flex items-center justify-between pr-2">
+                                <Brand />
+                                <button type="button" aria-label="Close menu" onClick={() => setDrawer(false)} className="grid size-11 place-items-center text-white">
+                                    <X size={20} />
+                                </button>
+                            </div>
+                            <NavList path={path} modules={auth.modules} onNavigate={() => setDrawer(false)} />
+                        </motion.aside>
+                    </motion.div>
+                ) : null}
+            </AnimatePresence>
+
+            <header className="sticky top-0 z-20 flex items-center gap-2 border-b border-rule bg-tile/95 px-3 py-2 backdrop-blur sm:px-5">
+                <button type="button" aria-label="Open menu" onClick={() => setDrawer(true)} className="grid size-11 shrink-0 place-items-center rounded-tile text-cobalt-800 hover:bg-cobalt-100 lg:hidden">
+                    <Menu size={21} />
+                </button>
+                <form onSubmit={submitSearch} className="relative min-w-0 flex-1 sm:max-w-sm" role="search">
+                    <Search size={16} aria-hidden className="pointer-events-none absolute top-1/2 left-3 -translate-y-1/2 text-ink-faint" />
+                    <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search goats" aria-label="Search goats by number, name or tag" className="field pl-9" />
+                </form>
+                <span className="ml-auto hidden items-center gap-1.5 rounded-[4px] bg-watch-100 px-2 py-1 text-xs font-semibold text-watch-700 md:inline-flex">
+                    Synthetic demo data
+                </span>
+                <RoleSwitcher auth={auth} roles={roles} />
+            </header>
+
+            <motion.main key={path} initial={{ opacity: 0.4, y: 4 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }} className="mx-auto max-w-[1440px] px-3 py-5 sm:px-5">
+                {children}
+            </motion.main>
+
+            <AnimatePresence>
+                {toast ? (
+                    <motion.div role="status" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 12 }} transition={{ duration: 0.2 }} className="fixed right-4 bottom-4 left-4 z-50 rounded-tile bg-cobalt-900 px-4 py-3 text-sm font-medium text-white shadow-float sm:left-auto sm:max-w-sm">
+                        {toast}
+                    </motion.div>
+                ) : null}
+            </AnimatePresence>
+        </div>
+    );
+}

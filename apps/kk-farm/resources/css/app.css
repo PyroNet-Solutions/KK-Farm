@@ -1,0 +1,162 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/hanken-grotesk/index.css';
+
+@source '../views';
+@source '../js';
+
+/* Multani kashi glaze: cobalt shell, turquoise action, cool glazed white ground. */
+@theme {
+    --font-sans: 'Hanken Grotesk Variable', ui-sans-serif, system-ui, sans-serif;
+
+    --color-glaze: oklch(0.975 0.008 245);
+    --color-tile: oklch(0.995 0.003 245);
+    --color-rule: oklch(0.905 0.018 250);
+    --color-rule-strong: oklch(0.82 0.03 252);
+
+    --color-ink: oklch(0.27 0.05 262);
+    --color-ink-soft: oklch(0.45 0.045 258);
+    --color-ink-faint: oklch(0.54 0.04 256);
+
+    --color-cobalt-950: oklch(0.2 0.075 265);
+    --color-cobalt-900: oklch(0.27 0.11 265);
+    --color-cobalt-800: oklch(0.33 0.135 265);
+    --color-cobalt-700: oklch(0.4 0.16 265);
+    --color-cobalt-600: oklch(0.48 0.17 263);
+    --color-cobalt-200: oklch(0.87 0.05 262);
+    --color-cobalt-100: oklch(0.935 0.025 262);
+
+    --color-turq-800: oklch(0.42 0.08 195);
+    --color-turq-700: oklch(0.5 0.095 195);
+    --color-turq-600: oklch(0.58 0.105 193);
+    --color-turq-400: oklch(0.76 0.115 190);
+    --color-turq-100: oklch(0.945 0.035 190);
+
+    --color-manganese-600: oklch(0.48 0.13 305);
+    --color-manganese-100: oklch(0.94 0.03 305);
+
+    --color-ok-700: oklch(0.47 0.11 155);
+    --color-ok-100: oklch(0.945 0.045 155);
+    --color-watch-700: oklch(0.52 0.115 75);
+    --color-watch-400: oklch(0.8 0.14 82);
+    --color-watch-100: oklch(0.955 0.05 90);
+    --color-treat-700: oklch(0.54 0.16 45);
+    --color-treat-400: oklch(0.72 0.16 48);
+    --color-treat-100: oklch(0.945 0.04 55);
+    --color-crit-700: oklch(0.5 0.19 27);
+    --color-crit-500: oklch(0.6 0.21 27);
+    --color-crit-100: oklch(0.94 0.04 25);
+
+    --radius-tile: 6px;
+    --shadow-tile: 0 1px 2px oklch(0.27 0.05 262 / 0.06), 0 6px 16px -10px oklch(0.27 0.11 265 / 0.22);
+    --shadow-float: 0 12px 34px -12px oklch(0.2 0.075 265 / 0.38);
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+    html {
+        font-family: var(--font-sans);
+        color: var(--color-ink);
+        background: var(--color-glaze);
+        -webkit-text-size-adjust: 100%;
+        scrollbar-color: var(--color-rule-strong) transparent;
+    }
+    body {
+        margin: 0;
+        min-height: 100dvh;
+        font-size: 0.9375rem;
+        line-height: 1.5;
+        font-feature-settings: 'tnum' 1;
+    }
+    h1, h2, h3 {
+        text-wrap: balance;
+        line-height: 1.2;
+    }
+    ::selection {
+        background: var(--color-turq-400);
+        color: var(--color-cobalt-950);
+    }
+    :focus-visible {
+        outline: 2px solid var(--color-turq-600);
+        outline-offset: 2px;
+        border-radius: 4px;
+    }
+    input, select, textarea, button {
+        font: inherit;
+        color: inherit;
+    }
+    input, textarea {
+        caret-color: var(--color-turq-700);
+    }
+    button:not(:disabled), [role='button'], select {
+        cursor: pointer;
+    }
+    a {
+        text-underline-offset: 3px;
+    }
+    main .grid > * {
+        min-width: 0;
+    }
+}
+
+@layer components {
+    .field {
+        width: 100%;
+        min-height: 2.75rem;
+        padding: 0.5rem 0.75rem;
+        background: var(--color-tile);
+        border: 1px solid var(--color-rule-strong);
+        border-radius: var(--radius-tile);
+        transition: border-color 150ms, box-shadow 150ms;
+    }
+    .field:hover {
+        border-color: var(--color-ink-faint);
+    }
+    .field:focus {
+        outline: none;
+        border-color: var(--color-turq-600);
+        box-shadow: 0 0 0 3px var(--color-turq-100);
+    }
+    .field::placeholder {
+        color: var(--color-ink-faint);
+    }
+    .data-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    .data-table th {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        background: var(--color-tile);
+        padding: 0.625rem 0.875rem;
+        text-align: left;
+        font-size: 0.8125rem;
+        font-weight: 600;
+        color: var(--color-ink-soft);
+        border-bottom: 1px solid var(--color-rule-strong);
+        white-space: nowrap;
+    }
+    .data-table td {
+        padding: 0.625rem 0.875rem;
+        border-bottom: 1px solid var(--color-rule);
+        vertical-align: middle;
+    }
+    .data-table tbody tr {
+        transition: background-color 120ms;
+    }
+    .data-table tbody tr:hover {
+        background: var(--color-cobalt-100);
+    }
+    .data-table tbody tr:last-child td {
+        border-bottom: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}

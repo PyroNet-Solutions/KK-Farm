@@ -1,0 +1,189 @@
+import { Link } from '@inertiajs/react';
+import { AlertTriangle, Baby, HeartPulse, Inbox, Mars, Venus } from 'lucide-react';
+import type { ButtonHTMLAttributes, ReactNode } from 'react';
+import GoatPortrait from './GoatPortrait';
+import type { GoatCard, Health } from '../types';
+
+export function cx(...parts: Array<string | false | null | undefined>): string {
+    return parts.filter(Boolean).join(' ');
+}
+
+export const pkr = (value: number): string => `PKR ${Math.round(value).toLocaleString('en-PK')}`;
+
+export const pkrShort = (value: number): string => {
+    const abs = Math.abs(value);
+    if (abs >= 1e6) {
+        return `PKR ${(value / 1e6).toFixed(2)}M`;
+    }
+    return abs >= 1e3 ? `PKR ${Math.round(value / 1e3)}k` : `PKR ${value}`;
+};
+
+export const monthLabel = (ym: string): string => new Date(`${ym}-01`).toLocaleDateString('en-GB', { month: 'short' });
+
+export const HEALTH: Record<Health, { label: string; tile: string; chip: string }> = {
+    healthy: { label: 'Healthy', tile: 'bg-cobalt-700', chip: 'bg-ok-100 text-ok-700' },
+    watch: { label: 'Watch', tile: 'bg-watch-400', chip: 'bg-watch-100 text-watch-700' },
+    treatment: { label: 'In treatment', tile: 'bg-treat-400', chip: 'bg-treat-100 text-treat-700' },
+    critical: { label: 'Critical', tile: 'bg-crit-500', chip: 'bg-crit-100 text-crit-700' },
+};
+
+export function PageHeader({ title, description, actions }: { title: string; description?: string; actions?: ReactNode }) {
+    return (
+        <header className="mb-5 flex flex-wrap items-end justify-between gap-3">
+            <div className="min-w-0">
+                <h1 className="text-2xl font-bold tracking-tight text-cobalt-900">{title}</h1>
+                {description ? <p className="mt-1 max-w-[68ch] text-ink-soft">{description}</p> : null}
+            </div>
+            {actions ? <div className="flex flex-wrap items-center gap-2">{actions}</div> : null}
+        </header>
+    );
+}
+
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & { variant?: 'primary' | 'secondary' | 'quiet' | 'danger' };
+
+const BUTTON: Record<NonNullable<ButtonProps['variant']>, string> = {
+    primary: 'bg-turq-700 text-white hover:bg-turq-800 active:bg-turq-800',
+    secondary: 'bg-tile text-cobalt-800 border border-rule-strong hover:bg-cobalt-100',
+    quiet: 'text-cobalt-700 hover:bg-cobalt-100',
+    danger: 'bg-tile text-crit-700 border border-crit-500/40 hover:bg-crit-100',
+};
+
+export function Button({ variant = 'primary', className, ...props }: ButtonProps) {
+    return (
+        <button
+            type="button"
+            {...props}
+            className={cx(
+                'inline-flex min-h-11 items-center justify-center gap-2 rounded-tile px-4 py-2 text-sm font-semibold transition-colors duration-150 disabled:cursor-not-allowed disabled:opacity-50',
+                BUTTON[variant],
+                className,
+            )}
+        />
+    );
+}
+
+export function Panel({ title, description, actions, children, className, flush }: { title?: string; description?: string; actions?: ReactNode; children: ReactNode; className?: string; flush?: boolean }) {
+    return (
+        <section className={cx('rounded-tile border border-rule bg-tile shadow-tile', className)}>
+            {title ? (
+                <div className="flex flex-wrap items-center justify-between gap-2 border-b border-rule px-4 py-3">
+                    <div className="min-w-0">
+                        <h2 className="font-semibold text-cobalt-900">{title}</h2>
+                        {description ? <p className="text-sm text-ink-soft">{description}</p> : null}
+                    </div>
+                    {actions}
+                </div>
+            ) : null}
+            <div className={flush ? '' : 'p-4'}>{children}</div>
+        </section>
+    );
+}
+
+export function Stat({ label, value, note, tone }: { label: string; value: ReactNode; note?: string; tone?: 'alert' | 'good' }) {
+    return (
+        <div className="min-w-0 px-4 py-3">
+            <div className="truncate text-sm text-ink-soft">{label}</div>
+            <div className={cx('mt-0.5 text-2xl font-bold tracking-tight', tone === 'alert' ? 'text-crit-700' : tone === 'good' ? 'text-ok-700' : 'text-cobalt-900')}>{value}</div>
+            {note ? <div className="truncate text-sm text-ink-faint">{note}</div> : null}
+        </div>
+    );
+}
+
+export function StatRow({ children }: { children: ReactNode }) {
+    return <div className="mb-4 grid grid-cols-2 divide-rule rounded-tile border border-rule bg-tile shadow-tile sm:flex sm:divide-x [&>*]:sm:flex-1">{children}</div>;
+}
+
+export function Chip({ className, children }: { className?: string; children: ReactNode }) {
+    return <span className={cx('inline-flex items-center gap-1 whitespace-nowrap rounded-[4px] px-1.5 py-0.5 text-xs font-semibold', className)}>{children}</span>;
+}
+
+export function HealthChip({ health }: { health: Health }) {
+    return <Chip className={HEALTH[health].chip}>{HEALTH[health].label}</Chip>;
+}
+
+export function ReproChip({ repro }: { repro?: string | null }) {
+    if (repro === 'pregnant') {
+        return (
+            <Chip className="bg-manganese-100 text-manganese-600">
+                <HeartPulse size={12} aria-hidden /> Pregnant
+            </Chip>
+        );
+    }
+    if (repro === 'lactating') {
+        return (
+            <Chip className="bg-turq-100 text-turq-800">
+                <Baby size={12} aria-hidden /> Lactating
+            </Chip>
+        );
+    }
+    return null;
+}
+
+export function SexIcon({ sex }: { sex: string }) {
+    return sex === 'male' ? <Mars size={14} className="text-cobalt-600" aria-label="Male" /> : <Venus size={14} className="text-manganese-600" aria-label="Female" />;
+}
+
+export function GoatLabel({ goat, size = 38 }: { goat: Pick<GoatCard, 'id' | 'number' | 'name' | 'coat' | 'sex' | 'photo'>; size?: number }) {
+    return (
+        <Link href={`/goats/${goat.id}`} prefetch className="group flex min-w-0 items-center gap-2.5">
+            {goat.photo ? <img src={`/media/${goat.photo}`} alt="" width={size} height={size} loading="lazy" className="shrink-0 rounded-tile object-cover" style={{ width: size, height: size }} /> : <GoatPortrait number={goat.number} coat={goat.coat} sex={goat.sex} size={size} />}
+            <span className="min-w-0">
+                <span className="block truncate font-semibold text-cobalt-800 group-hover:underline">{goat.name ?? 'Unnamed'}</span>
+                <span className="block truncate text-sm text-ink-soft">{goat.number}</span>
+            </span>
+        </Link>
+    );
+}
+
+export function Field({ label, error, hint, children }: { label: string; error?: string; hint?: string; children: ReactNode }) {
+    return (
+        <label className="block">
+            <span className="mb-1 block text-sm font-semibold text-ink">{label}</span>
+            {children}
+            {hint && !error ? <span className="mt-1 block text-sm text-ink-faint">{hint}</span> : null}
+            {error ? <span className="mt-1 block text-sm font-medium text-crit-700">{error}</span> : null}
+        </label>
+    );
+}
+
+export function Empty({ title, children }: { title: string; children?: ReactNode }) {
+    return (
+        <div className="flex flex-col items-center gap-1 px-6 py-10 text-center">
+            <Inbox size={22} className="text-ink-faint" aria-hidden />
+            <p className="font-semibold text-ink">{title}</p>
+            {children ? <p className="max-w-[46ch] text-sm text-ink-soft">{children}</p> : null}
+        </div>
+    );
+}
+
+export function Note({ children }: { children: ReactNode }) {
+    return (
+        <p className="flex items-start gap-2 rounded-tile bg-watch-100 px-3 py-2 text-sm text-watch-700">
+            <AlertTriangle size={15} className="mt-0.5 shrink-0" aria-hidden />
+            <span>{children}</span>
+        </p>
+    );
+}
+
+export function Tabs({ tabs, value, onChange }: { tabs: Array<{ id: string; label: string; count?: number }>; value: string; onChange: (id: string) => void }) {
+    return (
+        <div role="tablist" className="-mx-1 mb-4 flex gap-1 overflow-x-auto border-b border-rule px-1">
+            {tabs.map((tab) => (
+                <button
+                    key={tab.id}
+                    role="tab"
+                    type="button"
+                    aria-selected={value === tab.id}
+                    onClick={() => onChange(tab.id)}
+                    className={cx(
+                        '-mb-px min-h-11 whitespace-nowrap border-b-2 px-3 text-sm font-semibold transition-colors',
+                        value === tab.id ? 'border-turq-600 text-cobalt-900' : 'border-transparent text-ink-soft hover:text-cobalt-800',
+                    )}
+                >
+                    {tab.label}
+                    {tab.count !== undefined ? <span className="ml-1.5 text-ink-faint">{tab.count}</span> : null}
+                </button>
+            ))}
+        </div>
+    );
+}
