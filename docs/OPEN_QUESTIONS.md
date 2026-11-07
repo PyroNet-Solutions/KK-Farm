@@ -1,0 +1,132 @@
+# Open Questions
+
+**Purpose:** The interview checklist for the farm visit and CEO review. Every `[ASSUMED]` and `[UNKNOWN]` item in [REQUIREMENTS.md](REQUIREMENTS.md) links here. Answers go into the *Answer* column and the matching requirement is re-tagged `[CONFIRMED]`; decisions go into [DECISIONS_LOG.md](DECISIONS_LOG.md).
+
+**Legend — Blocks:** `P1` = blocks Phase 1 start · `P2+` = can be answered later · `Data` = blocks data migration
+
+The brief lists these as pending — **do not invent answers**: employee count & responsibilities · handwritten register structure · RFID reader make/model/SDK · existing animal IDs and RFID mapping · historical breeding/pedigree · existing weight records · existing medical records · actual feeding groups & rations · shed layout & capacity · financial approval workflows · technology stack & deployment environment.
+
+---
+
+## A. Animal identity (Q-AM)
+
+| ID | Question | Why it matters | Ask | Blocks | Answer |
+|----|----------|----------------|-----|--------|--------|
+| Q-AM-1 | What is the current animal numbering scheme (in the registers / on visual tags)? Is it unique and never reused? | Decides whether we can adopt it as the human-readable farm number or must issue new ones. | CEO, caretakers | P1, Data | |
+| Q-AM-2 | Is there an existing list mapping goats → RFID tag codes? In what form? | Needed for the initial import. | Farm manager | Data | |
+| Q-AM-3 | Are there castrated males? How should they be classified? | Affects sex/status model and breeding eligibility. | Vet | P1 | |
+| Q-AM-4 | Should each goat have photos (for identification when a tag is lost)? | Storage and mobile UX. | CEO | P2+ | |
+| Q-AM-5 | Is milk production relevant (dairy breeds, lactation records)? | Adds a whole module if yes. | CEO | P1 | |
+| Q-AM-6 | What happens today when a tag falls off or fails? Who replaces it, and is it recorded? | Defines the reassignment workflow. | Farm manager | P1 | |
+| Q-AM-7 | What exit reasons exist (sold, gifted, sacrificed/Qurbani, died, culled, stolen/lost)? Any paperwork per reason? | Lifecycle states. | CEO | P1 | |
+
+## B. Pedigree & breeding (Q-PB)
+
+| ID | Question | Why it matters | Ask | Blocks | Answer |
+|----|----------|----------------|-----|--------|--------|
+| Q-PB-1 | Natural mating only, or also AI (artificial insemination)? Group mating (one buck with several does) or controlled single pairings? | If group mating, sire may be *probable* rather than certain. | Vet, CEO | P1 | |
+| Q-PB-2 | Gestation length used today; does it differ by breed? | Expected kidding date calculation. | Vet | P1 | |
+| Q-PB-3 | Do you want warnings when a proposed mating is between close relatives? What threshold? | Core "quality breeding" feature. | CEO, vet | P2+ | |
+| Q-PB-4 | For purchased animals, how much pedigree is known? Are there breeder certificates? | Pedigree depth and import format. | CEO | Data | |
+| Q-PB-5 | What historical breeding records exist (register pages, Excel)? How far back? | Migration scope. | Farm manager | Data | |
+| Q-PB-6 | How are heat cycles observed today (visual signs, teaser buck, schedule)? | Form design. | Vet, caretakers | P1 | |
+| Q-PB-7 | How is pregnancy confirmed (ultrasound, palpation, no-return-to-heat)? | Examination record fields. | Vet | P1 | |
+| Q-PB-8 | What is recorded at kidding (birth weight, difficulty, stillbirths, colostrum, kid sex)? | Kidding form. | Vet | P1 | |
+| Q-PB-9 | What makes a goat "high quality" for KK Farm (breed standard, weight at age, conformation, fertility, lineage)? | Drives scoring and AI recommendations. | CEO, vet | P2+ | |
+
+## C. Weight (Q-WT)
+
+| ID | Question | Why it matters | Ask | Blocks | Answer |
+|----|----------|----------------|-----|--------|--------|
+| Q-WT-1 | Unit (kg) and precision (0.1 kg?). | Storage and display. | Farm manager | P1 | |
+| Q-WT-2 | What scale is used? Does it have Bluetooth/USB output? | Possible integration later. | Farm manager | P2+ | |
+| Q-WT-3 | What weight history exists and in what format? | Migration. | Farm manager | Data | |
+| Q-WT-4 | How often are goats weighed today, and who does it? | Workflow and alert thresholds. | Farm manager | P1 | |
+| Q-WT-5 | What weight change should trigger a vet alert (e.g. >5% loss in 2 weeks)? | Alert rules must be vet-defined. | Vet | P2+ | |
+
+## D. Veterinary (Q-VT)
+
+| ID | Question | Why it matters | Ask | Blocks | Answer |
+|----|----------|----------------|-----|--------|--------|
+| Q-VT-1 | Who may record what: can caretakers log symptoms? Can anyone other than a vet record a treatment given? | RBAC and accountability. | CEO, vets | P1 | |
+| Q-VT-2 | Are meat/milk withdrawal periods tracked after medication? | Sale blocking logic. | Vet | P1 | |
+| Q-VT-3 | Is medicine stock managed on farm? Where is it stored, who issues it? | Inventory module scope. | Vet, CEO | P2+ | |
+| Q-VT-4 | What medical records exist today (per animal? per day?) and in what format? | Migration. | Vets | Data | |
+| Q-VT-5 | Standard vaccination/deworming schedule used (names, intervals, ages)? | Preventive-care calendar. | Vet | P1 | |
+| Q-VT-6 | Which conditions count as "critical" requiring immediate alert to the CEO/manager? | Alert routing. | Vet, CEO | P1 | |
+| Q-VT-7 | How many vets; do they work shifts; do they need to see each other's notes? | Accounts and visibility. | CEO | P1 | |
+| Q-VT-8 | Is a standard diagnosis/symptom vocabulary preferred, or free text? | Data quality vs. speed. | Vets | P1 | |
+
+## E. Nutrition & feeding (Q-NF)
+
+| ID | Question | Why it matters | Ask | Blocks | Answer |
+|----|----------|----------------|-----|--------|--------|
+| Q-NF-1 | What feeding groups exist today, what is fed to each, quantities, frequency? | Seed data and plan model. | Farm manager, vet | P1 | |
+| Q-NF-2 | Who decides rations today and who approves changes? | Approval workflow (NF-4). | CEO | P1 | |
+| Q-NF-3 | How is feeding confirmed today (checklist, verbal)? | Compliance form. | Feeding staff | P1 | |
+| Q-NF-4 | Is feed stock tracked (bags in, consumption)? | Inventory scope. | Farm manager | P2+ | |
+| Q-NF-5 | Are there body-condition scores or other criteria used to move a goat between groups? | Group-assignment rules. | Vet | P2+ | |
+
+## F. Farm operations (Q-FM)
+
+| ID | Question | Why it matters | Ask | Blocks | Answer |
+|----|----------|----------------|-----|--------|--------|
+| Q-FM-1 | Shed layout: pens per shed, capacity per pen, which groups live where? Plans for the 6 sheds? | Location model. | CEO, farm manager | P1 | |
+| Q-FM-2 | What daily tasks exist (feeding, cleaning, water, observation) and how are they assigned today? | Task module. | Farm manager | P1 | |
+| Q-FM-3 | Is there mobile signal / Wi‑Fi inside the sheds? | Offline-first necessity. | Farm manager | P1 | |
+| Q-FM-4 | Do staff have their own smartphones, or will the farm provide shared devices? | Device management, login UX. | CEO | P1 | |
+| Q-FM-5 | What are the handwritten registers (list each register, its columns, how far back)? | Migration and parity. | Farm manager | Data | |
+
+## G. Finance (Q-FN)
+
+| ID | Question | Why it matters | Ask | Blocks | Answer |
+|----|----------|----------------|-----|--------|--------|
+| Q-FN-1 | Currency PKR only? Any foreign purchases? | Money model. | CEO | P1 | |
+| Q-FN-2 | How should shared costs (feed, salaries, utilities) be allocated to individual goats for lifetime cost? | Allocation rule. | CEO | P2+ | |
+| Q-FN-3 | Is append-only accounting (corrections as reversing entries) acceptable? | Audit design. | CEO | P1 | |
+| Q-FN-4 | What approval workflow will apply once a finance employee exists (limits, dual approval)? | Permission design. | CEO | P2+ | |
+| Q-FN-5 | Is there an existing accounting system to integrate or export to? | Integration scope. | CEO | P2+ | |
+| Q-FN-6 | Cash, bank, mobile wallet — which payment methods are used? | Payment model. | CEO | P1 | |
+
+## H. Roles & people (Q-RB)
+
+| ID | Question | Why it matters | Ask | Blocks | Answer |
+|----|----------|----------------|-----|--------|--------|
+| Q-RB-1 | Actual staff list: how many people, what each does, literacy/language, smartphone comfort. | Roles and UX. | CEO | P1 | |
+| Q-RB-2 | Does one person hold multiple roles (e.g. manager who also feeds)? | Role model. | CEO | P1 | |
+| Q-RB-3 | Who should receive critical alerts, and how (app notification, SMS, WhatsApp)? | Notification channel. | CEO | P2+ | |
+
+## I. RFID & hardware (Q-RF)
+
+| ID | Question | Why it matters | Ask | Blocks | Answer |
+|----|----------|----------------|-----|--------|--------|
+| Q-RF-1 | Reader make, model, Android version, vendor app name. **Photograph the label.** | Integration approach. | Farm visit | P1 | |
+| Q-RF-2 | Tag type: LF (134.2 kHz FDX‑B/HDX, ISO 11784/11785) or UHF (EPC Gen2)? Tag brand and printed number. | Determines which SDK and read range. | Farm visit | P1 | |
+| Q-RF-3 | Does the vendor provide an SDK / API / keyboard-wedge mode? Is it documented? | Build vs. workaround. | Vendor | P1 | |
+| Q-RF-4 | How many readers; who carries them; charging routine? | Device fleet. | Farm manager | P2+ | |
+| Q-RF-5 | Are tags registered with any provincial system (e.g. PAITS)? | Compliance/ID format. | CEO | P2+ | |
+
+## J. AI & intelligence (Q-AI)
+
+| ID | Question | Why it matters | Ask | Blocks | Answer |
+|----|----------|----------------|-----|--------|--------|
+| Q-AI-1 | Is rule-based alerting acceptable for Phase 1, with ML later? | Sets expectations. | CEO | P1 | |
+| Q-AI-2 | Who reviews/approves alert rules (thresholds)? | Veterinary accountability. | Vet | P2+ | |
+
+## K. Technology & environment (Q-NFR)
+
+| ID | Question | Why it matters | Ask | Blocks | Answer |
+|----|----------|----------------|-----|--------|--------|
+| Q-NFR-1 | Is offline operation required? (see Q-FM-3) | Architecture. | CEO | P1 | |
+| Q-NFR-2 | Languages: Urdu, English, others (Punjabi, Sindhi)? Script preference? | i18n. | CEO | P1 | |
+| Q-NFR-3 | Preferred technology stack and hosting (cloud, on-prem, existing PyroNet infra later)? | Stack decision. | CEO + engineering | P1 | |
+| Q-NFR-4 | Backup/retention expectations; any regulatory record-keeping requirement? | Data policy. | CEO | P2+ | |
+
+---
+
+## How to use during the farm visit
+
+1. Walk the shed first; photograph registers, tags, reader, scale, feed store.
+2. Go through sections A–I with the relevant person; write answers directly in this file on a branch.
+3. Anything surprising → add a new question rather than guessing.
+4. After the visit: open a PR "Farm visit findings", update REQUIREMENTS.md tags, and log decisions.

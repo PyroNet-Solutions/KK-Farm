@@ -1,0 +1,17 @@
+﻿# Local tool settings
+.claude/
+.aidex/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+
+# Never commit real data, secrets or exports
+*.env
+.env.*
+*.xlsx
+*.xls
+*.csv
+*.sqlite
+*.db
