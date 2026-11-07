@@ -2,8 +2,13 @@
 
 > **Phase:** Discovery & repository foundation (no application code yet)
 > **Principle:** *Quality of goats, not quantity of goats.*
+> **Product principle:** KK Farm is **PyroNet Solutions' own original platform, built from scratch** — not a purchased, rebranded, white-labelled or forked product. Competitors are studied for inspiration only; frameworks are tools; we own code, schema, rules, APIs, configuration, docs, deployment and data; **development and staging budget is $0**. Full text: [docs/PROJECT_PRINCIPLES.md](docs/PROJECT_PRINCIPLES.md).
 
 KK Farm is a professional goat breeding operation. This repository is the single source of truth for the software platform that will manage every goat through its complete lifecycle — identity, pedigree, genetics, breeding, veterinary health, nutrition, weight, finances and day-to-day farm operations — in a way that is easy to use on a mobile phone by staff with limited technical training.
+
+## How to review this project
+
+All review happens **in GitHub** — repository, PRs, issues and documents. Direct links to every open PR, branch, issue and file: **[docs/GITHUB_REVIEW_GUIDE.md](docs/GITHUB_REVIEW_GUIDE.md)**. Live application testing is a future milestone, subject to a genuinely free hosting solution; the budget is **$0** and nothing here creates charges.
 
 ## Where things stand
 
@@ -14,7 +19,8 @@ KK Farm is a professional goat breeding operation. This repository is the single
 | Excel workbook (`KK_Farms_360_Goat_Management_System.xlsx`) | **Not yet received** — analysis pending |
 | Competitor review (goatmart.pk) | Site offline at time of review — see [research note](docs/research/COMPETITOR_GOATMART.md) |
 | RFID hardware | Make/model unknown — see [RFID research](docs/RFID_INTEGRATION_RESEARCH.md) |
-| Technology stack | **Not decided** — proposal only |
+| Technology stack | **Decided 2026-11-07 (D-023):** Laravel 13 + Octane · Inertia 3 + React 19 · PostgreSQL 18 · Valkey 9 · Reverb · Horizon · imgproxy + Garage · Caddy · Docker Compose — see [TECHNOLOGY_EVALUATION.md](docs/TECHNOLOGY_EVALUATION.md). Mobile delivery and hosting still open. |
+| Product direction | **Premium, real-time livestock intelligence platform** — every goat with its own digital identity, photographs, medical/breeding history and complete lifecycle record (owner, 2026-11-07) |
 | Application code | None. Development does not start until farm-visit findings are reviewed and approved. |
 
 See [PROJECT_STATUS.md](docs/PROJECT_STATUS.md) for the live status and [OPEN_QUESTIONS.md](docs/OPEN_QUESTIONS.md) for everything that still needs an answer.
@@ -34,7 +40,13 @@ Read in this order if you are new:
 9. [AI_INTELLIGENCE_DESIGN.md](docs/AI_INTELLIGENCE_DESIGN.md) — advisory intelligence layer, guard-rails
 10. [IMPLEMENTATION_ROADMAP.md](docs/IMPLEMENTATION_ROADMAP.md) — recommended phases
 11. [DECISIONS_LOG.md](docs/DECISIONS_LOG.md) — decisions taken, with reasons
-12. [docs/research/](docs/research/) — competitor and workbook analysis
+11a. [TEAM_WORKFLOW.md](docs/TEAM_WORKFLOW.md) · [TESTING_STRATEGY.md](docs/TESTING_STRATEGY.md) · [CI_PIPELINE_PROPOSAL.md](docs/CI_PIPELINE_PROPOSAL.md) — how the team works, tests and validates PRs
+11b. [TECHNOLOGY_EVALUATION.md](docs/TECHNOLOGY_EVALUATION.md) — two stacks compared with verified latest-stable versions; recommendation (proposed)
+11d. [STAGING_ENVIRONMENT.md](docs/STAGING_ENVIRONMENT.md) — mandatory live-staging acceptance milestone; paid-hosting evaluation kept as reference only; **budget $0 (D-033)**; no free option runs the complete app reliably, so staging is deferred (§6b)
+0. [PROJECT_PRINCIPLES.md](docs/PROJECT_PRINCIPLES.md) · [DEPENDENCIES_AND_LICENSES.md](docs/DEPENDENCIES_AND_LICENSES.md) · [GITHUB_REVIEW_GUIDE.md](docs/GITHUB_REVIEW_GUIDE.md) — fundamental principles, dependency/licence register, and the review guide with direct links
+11c. [PERFORMANCE_ACCEPTANCE_CRITERIA.md](docs/PERFORMANCE_ACCEPTANCE_CRITERIA.md) · [REALTIME_ARCHITECTURE.md](docs/REALTIME_ARCHITECTURE.md) · [MEDIA_AND_PHOTOS.md](docs/MEDIA_AND_PHOTOS.md) · [SHARED_VM_ARCHITECTURE.md](docs/SHARED_VM_ARCHITECTURE.md) — speed targets, live updates, goat photographs, shared-VM isolation
+12. [docs/research/](docs/research/) — competitor and workbook analysis, the [platform & repository comparison](docs/research/PLATFORM_COMPARISON.md) (licensing and reuse feasibility) and the [five-product competitor benchmark](docs/research/COMPETITOR_BENCHMARK.md) (feature matrix and the gaps KK Farm must own)
+13. [docs/farm-visit/](docs/farm-visit/) — **On-Site Discovery Pack**: [field guide](docs/farm-visit/FARM_VISIT_FIELD_GUIDE.md) · [blank data-capture templates](docs/farm-visit/FARM_DATA_CAPTURE_TEMPLATES.md) · [RFID hardware inspection](docs/farm-visit/RFID_HARDWARE_INSPECTION.md) · [workflow interviews & observation](docs/farm-visit/FARM_WORKFLOW_DISCOVERY.md) · [prioritised open questions](docs/farm-visit/FARM_VISIT_OPEN_QUESTIONS.md)
 
 ## Ground rules for this phase
 
@@ -48,19 +60,28 @@ These come from the project brief and are **mandatory**:
 - **No Pull Request is merged without explicit authorization from the project owner.**
 - No destructive Git operations (force-push, history rewrite, branch deletion of others' work).
 
-## How to contribute
+## Team and how we work
+
+| Who | Role |
+|-----|------|
+| **Ammar** | Project Owner / CEO — final business & technical decisions, approves every merge and deployment |
+| **Claude Code** | Lead Software Engineer — implementation, migrations, APIs, real-time, RFID, photos, UI, automated tests, CI configuration |
+| **ChatGPT** | GitHub Engineering Manager, Independent Reviewer & QA Lead — issues/labels/milestones, independent PR review, testing strategy and quality gates |
+
+Full workflow, approval boundaries and collaboration rules: [docs/TEAM_WORKFLOW.md](docs/TEAM_WORKFLOW.md). Testing structure: [docs/TESTING_STRATEGY.md](docs/TESTING_STRATEGY.md). CI: [docs/CI_PIPELINE_PROPOSAL.md](docs/CI_PIPELINE_PROPOSAL.md).
 
 ```
-main                      ← protected; only merged via authorized PR
+main                      ← protected; only merged via PR authorised by Ammar
 └── docs/<topic>          ← documentation branches
-└── feat/<topic>          ← future feature branches (not before approval)
+└── feat/<issue>-<slug>   ← feature branches (not before Phase 1 approval)
+└── fix/<issue>-<slug>    ← bug fixes (always with a regression test)
 ```
 
-1. Branch from `main`.
-2. Keep confirmed facts, assumptions and open questions clearly labelled (`[CONFIRMED]`, `[ASSUMED]`, `[UNKNOWN]`).
-3. Record any decision in `DECISIONS_LOG.md` with the reason.
-4. Open a PR using the template; link the GitHub Issue it addresses.
-5. Wait for explicit merge authorization.
+1. Start from a GitHub issue with acceptance criteria (created/approved by ChatGPT and Ammar).
+2. Branch; keep facts labelled (`[CONFIRMED]`, `[ASSUMED]`, `[UNKNOWN]`); record decisions in `docs/DECISIONS_LOG.md`.
+3. Write tests with the code; push early so CI and the reviewer can see it.
+4. Open a PR with the template, `Closes #N`; respond to every review finding in the thread.
+5. CI green + review resolved → wait for Ammar's explicit merge authorisation.
 
 ## Glossary (for non-technical readers)
 

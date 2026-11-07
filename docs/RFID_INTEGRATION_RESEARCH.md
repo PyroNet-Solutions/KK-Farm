@@ -79,6 +79,8 @@ Rules:
 
 ## 6. Farm-visit inspection checklist (RFID)
 
+> The full fill-in version of this checklist is [farm-visit/RFID_HARDWARE_INSPECTION.md](farm-visit/RFID_HARDWARE_INSPECTION.md). The short list below is kept for orientation.
+
 - [ ] Photograph the reader (front, back label, any model number, Android version in Settings → About).
 - [ ] Note any pre-installed vendor app; open it and see how scans are shown; look for Settings → "output mode / keyboard / broadcast".
 - [ ] Photograph 2–3 ear tags up close (printed number, logo, colour, shape).

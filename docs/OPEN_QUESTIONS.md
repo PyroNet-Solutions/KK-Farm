@@ -119,12 +119,44 @@ The brief lists these as pending — **do not invent answers**: employee count &
 |----|----------|----------------|-----|--------|--------|
 | Q-NFR-1 | Is offline operation required? (see Q-FM-3) | Architecture. | CEO | P1 | |
 | Q-NFR-2 | Languages: Urdu, English, others (Punjabi, Sindhi)? Script preference? | i18n. | CEO | P1 | |
-| Q-NFR-3 | Preferred technology stack and hosting (cloud, on-prem, existing PyroNet infra later)? | Stack decision. | CEO + engineering | P1 | |
+| Q-NFR-3 | Preferred technology stack and hosting (cloud, on-prem, existing PyroNet infra later)? | Stack decision. | CEO + engineering | P1 | **Stack: answered 2026-11-07 — Option A accepted (D-023).** Production hosting/VM provider still open (Q-INF-1); staging host pending D-032. |
 | Q-NFR-4 | Backup/retention expectations; any regulatory record-keeping requirement? | Data policy. | CEO | P2+ | |
+
+## L. Premium / real-time / photos / infrastructure (added 2026-11-07)
+
+| ID | Question | Why it matters | Ask | Blocks | Answer |
+|----|----------|----------------|-----|--------|--------|
+| Q-PF-1 | Which phone models do staff actually use (make, Android version, RAM)? | Replaces the reference device for performance targets. | Farm visit | P1 | |
+| Q-PF-2 | Expected peak concurrent users in 3 years? | Sets the load-test profile. | CEO | P2+ | |
+| Q-PF-3 | Acceptable maintenance window? | Deploy and backup scheduling. | CEO | P2+ | |
+| Q-RT-1 | Which screens must be live in Phase 1 (minimum: profile, shed view, ops activity, vet alerts, dashboard)? | Scope of real-time channels. | CEO | P1 | |
+| Q-RT-2 | Do critical alerts also need push/SMS/WhatsApp when the app is closed? | Separate delivery channel. | CEO | P2+ | |
+| Q-PH-1 | Soft-hide only, or allow true deletion of accidental uploads within 24 h? | Retention rule. | CEO | P1 | |
+| Q-PH-2 | Which photo context tags matter (side profile, udder, hoof, injury, sale)? | Gallery usefulness for vets/sales. | Vets, CEO | P2+ | |
+| Q-PH-3 | Keep full-resolution originals or the ≤ 2048 px client-resized master? | Storage and upload time. | CEO | P1 | |
+| Q-PH-4 | Should photos be shareable externally (buyer link)? | Signed-URL policy. | CEO | P2+ | |
+| Q-INF-1 | VM specification, provider, region, administrator? | Sizing and ops. | CEO | P2+ | |
+| Q-INF-2 | Domain names for website / app / real-time / media? | Proxy routing, TLS. | CEO | P2+ | |
+| Q-INF-3 | Off-site backup destination? | Independent restore (G-6). | CEO | P2+ | |
+| Q-INF-4 | Maintenance window and on-call owner? | Reliability targets. | CEO | P2+ | |
+| Q-NFR-5 | Is a GPL dependency acceptable anywhere, or permissive-only for anything shipped to devices? | Licence policy (see PLATFORM_COMPARISON). | CEO + engineering | P1 | |
+| Q-BC-2 | Trial a goat-specific SaaS to study UX — specifically Throf's free tier (≤ 25 head) and/or Farmbrite's 14-day trial? No payment details without approval. | Design input; see [research/COMPETITOR_BENCHMARK.md](research/COMPETITOR_BENCHMARK.md). | CEO | P2+ | |
+| Q-BC-4 | Has the CEO personally used any of the five benchmark products; which flows impressed or frustrated? | Direct UX input. | CEO | P2+ | |
+| Q-BC-5 | Must Urdu right-to-left layout be first-class from day one (as Throf does Arabic)? | i18n/RTL design effort. | CEO | P1 | |
+| Q-BC-3 | Future data exchange with a breed registry, PAITS or buyers? | ICAR ADE alignment priority. | CEO | P2+ | |
+| Q-STG-1 | Approve staging provider / plan / region / monthly budget (D-032: Railway Singapore recommended, Laravel Cloud second)? | Nothing can be provisioned without it. | CEO | P1 (before MVP completion) | **Approval WITHDRAWN 2026-11-07 (D-032 Rejected). Budget is $0 (D-033): no paid plan, no card, no paid trial, no provisioning that can charge. Re-asked as: which genuinely free option (if any) may be provisioned once research is in — see STAGING_ENVIRONMENT §6b.** |
+| Q-STG-2 | Is PostgreSQL 17 acceptable on staging if Laravel Cloud is chosen, or is PG 18 parity mandatory? | Provider choice. | CEO + engineering | P1 | |
+| Q-STG-3 | Staging domain (subdomain of the farm's future domain vs provider default)? | DNS, TLS, cost. | CEO | P2+ | |
+| Q-STG-4 | Who gets staging accounts besides the CEO (vets, QA Lead)? | Account provisioning. | CEO | P2+ | |
+| Q-STG-5 | Gate staging behind basic-auth / IP allow-list, or open login with rate limiting? | Exposure of a demo system. | CEO | P2+ | |
+| Q-STG-6 | GitHub Pages for static docs/prototypes: does the organisation's existing plan already include Pages for private repos (no new cost), or would the repo need to be public? Neither change is made without the CEO's decision. | Free static preview only; never the app. | CEO | P2+ | |
+| Q-STG-7 | What GitHub Actions allowance does the organisation's plan give for private repositories, and are Codespaces billed to the organisation? | CI must stay at $0; neither is enabled until confirmed. | CEO | P1 | |
 
 ---
 
 ## How to use during the farm visit
+
+The practical visit kit lives in [farm-visit/](farm-visit/): [FARM_VISIT_FIELD_GUIDE.md](farm-visit/FARM_VISIT_FIELD_GUIDE.md) (sequence and what to observe), [FARM_DATA_CAPTURE_TEMPLATES.md](farm-visit/FARM_DATA_CAPTURE_TEMPLATES.md) (blank forms), [RFID_HARDWARE_INSPECTION.md](farm-visit/RFID_HARDWARE_INSPECTION.md), [FARM_WORKFLOW_DISCOVERY.md](farm-visit/FARM_WORKFLOW_DISCOVERY.md) (interviews by role) and [FARM_VISIT_OPEN_QUESTIONS.md](farm-visit/FARM_VISIT_OPEN_QUESTIONS.md) (this list, prioritised P0–P3). This file remains the master record of answers.
 
 1. Walk the shed first; photograph registers, tags, reader, scale, feed store.
 2. Go through sections A–I with the relevant person; write answers directly in this file on a branch.

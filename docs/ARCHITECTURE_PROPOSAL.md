@@ -1,6 +1,13 @@
 # Architecture Proposal
 
-**Status:** PROPOSAL — not a decision. The technology stack and deployment environment are `[UNKNOWN]` (Q-NFR-3). This document gives a recommended shape and the reasoning so the CEO and engineering team can decide after the farm visit.
+**Status:** Architectural shape proposed; **technology stack accepted on 2026-11-07 (D-023, Option A — see [TECHNOLOGY_EVALUATION.md](TECHNOLOGY_EVALUATION.md))**. Deployment environment for production is still open (Q-NFR-3 hosting part; shared-VM principles in D-021); mobile delivery (D-028) waits for the reader inspection. This document keeps the reasoning and the alternatives considered.
+
+> **Updated 2026-11-07** for the owner's premium / real-time / performance direction. The detailed designs now live in companion documents, and this proposal references them:
+> - Concrete stack recommendation with verified versions → [TECHNOLOGY_EVALUATION.md](TECHNOLOGY_EVALUATION.md)
+> - Measurable speed targets and test method → [PERFORMANCE_ACCEPTANCE_CRITERIA.md](PERFORMANCE_ACCEPTANCE_CRITERIA.md)
+> - Event-driven real-time design (outbox, channels, authorisation, reconnection) → [REALTIME_ARCHITECTURE.md](REALTIME_ARCHITECTURE.md)
+> - Goat photographs and media pipeline → [MEDIA_AND_PHOTOS.md](MEDIA_AND_PHOTOS.md)
+> - Shared-VM isolation and portability → [SHARED_VM_ARCHITECTURE.md](SHARED_VM_ARCHITECTURE.md)
 
 ## 1. What the architecture must achieve
 
@@ -15,6 +22,11 @@
 | Finance restricted + audited | FN-11, FN-12 | Separate permission domain; immutable ledger |
 | AI assists, never decides | AI-3, AI-4 | Intelligence is a *read-only advisory* service that creates alerts/suggestions, never writes clinical records |
 | No deployment this phase | Brief §8 | Architecture must be runnable locally with sample data when the time comes; nothing here presumes production infra |
+| Exceptional speed, measurable | PF-1…PF-6 | Octane-class always-booted app server, read models for dashboards, cursor pagination + virtualised lists, code splitting, cache layer, background workers; targets in PERFORMANCE_ACCEPTANCE_CRITERIA |
+| Real-time is core | RT-1…RT-4 | Transactional outbox → broker → dedicated WebSocket service with per-channel authorisation; sub-second p95 |
+| Premium UI with photos | UX-1…UX-7, PH-1…PH-9 | Design system (Tailwind + accessible primitives), Motion animations with reduced-motion, interactive pedigree tree, imgproxy-served responsive images from object storage |
+| Shared VM, loosely coupled | INF-1…INF-3 | Separate Compose projects, DBs, credentials, buckets, backups; everything located by configuration |
+| Original product; ownership; no lock-in; future farms/SaaS | P-1…P-7 (D-034) | Greenfield code owned in GitHub; provider services only behind standard interfaces (S3, Redis protocol, SMTP, PostgreSQL); `farm_id`-ready top-level entities; portable to any host or our VM |
 
 ## 2. Proposed shape (logical view)
 
@@ -68,6 +80,8 @@
 
 **Recommendation (pending Q-RF-1…3):** Decide after inspecting the reader. If it offers keyboard-wedge or broadcast-intent scanning, Option **B** gives the fastest path with one codebase. If only a Java/Kotlin SDK is offered, Option **A** or **C** with a native scan module.
 
+*Update 2026-11-07:* the technology evaluation refines this to **installable PWA first, wrapped in Capacitor only if the reader's SDK requires native code** (D-028) — see [TECHNOLOGY_EVALUATION.md](TECHNOLOGY_EVALUATION.md) §3.3. A separate native codebase (Kotlin/Flutter/React Native) is not recommended for a team of this size.
+
 Whatever the choice, the **scan interface is abstracted**: the app receives `TagScanned(tag_code, reader_id, timestamp)` from a pluggable source (RFID SDK, keyboard-wedge, manual entry, QR code). This keeps the app independent of the hardware vendor.
 
 ## 4. Backend stack options
@@ -81,6 +95,8 @@ The brief says the preferred stack is pending. Options that fit the shape above:
 | **Node/TypeScript (NestJS) + PostgreSQL** | Shared language with a React/PWA front end |
 
 All three are suitable; the choice should follow **team familiarity and long-term maintainability**, not fashion. Record the decision in [DECISIONS_LOG.md](DECISIONS_LOG.md).
+
+*Update 2026-11-07:* [TECHNOLOGY_EVALUATION.md](TECHNOLOGY_EVALUATION.md) compares **Option A — Laravel 13 + Octane + Inertia 3/React 19** (recommended, D-023) against **Option B — NestJS 12 + Next.js 16** with verified latest-stable versions, and selects PostgreSQL 18, Valkey 9, Laravel Reverb (real-time), Horizon (jobs), Garage (S3 object storage), imgproxy (images), Caddy, Docker Compose and a Prometheus/Grafana/Loki/GlitchTip observability stack. All remain *Proposed* until Ammar accepts.
 
 ## 5. Offline & sync (if required by Q-FM-3)
 
